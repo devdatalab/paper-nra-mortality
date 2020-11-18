@@ -3,22 +3,21 @@
 /*************************************************************************************************/
 cap prog drop bound_mort
 prog def bound_mort, rclass
-{
-    syntax varlist(min=1 max=1) [if/], s(passthru) t(passthru) gen(string) [by(varname) xvar(string)]
-
-    qui {
+  syntax varlist(min=1 max=1) [if/], s(passthru) t(passthru) gen(string) [by(varname) xvar(string)]
+  
+  qui {
     
     capdrop __by __surv
     
-      /* set default xvar */
-      if mi("`xvar'") {
-          local xvar ed_rank_sex
-      }
-  
-      /* handle missing if */
-      if mi("`if'") {
-          local if 1
-      }
+    /* set default xvar */
+    if mi("`xvar'") {
+      local xvar ed_rank_sex
+    }
+    
+    /* handle missing if */
+    if mi("`if'") {
+      local if 1
+    }
 
     /* handle missing by */
     if mi("`by'") {
@@ -26,56 +25,61 @@ prog def bound_mort, rclass
       local by __by
     }
     
-      /* preserve to generate survival rate */
-      preserve
+    /* preserve to generate survival rate */
+    preserve
 
-      /* keep requested subset only */
-      keep if `if'
+    /* keep requested subset only */
+    keep if `if'
     
-      /* convert deaths to survival rate */
-      tokenize `varlist'
-      gen __surv = 100000 - `1'
-      
-      qui levelsof `by', local(by_values)
+    /* convert deaths to survival rate */
+    tokenize `varlist'
+    gen __surv = 100000 - `1'
+    
+    qui levelsof `by', local(by_values)
 
-      foreach by_value in `by_values' {
+    foreach by_value in `by_values' {
 
-        /* check for monotonicity in entire x-variable group */
-        sort `by' `xvar'
-        cap assert __surv > __surv[_n-1] if `by' == `by_value' & `by'[_n-1] == `by_value'
-        if _rc {
-          noi di "WARNING: NON-MONOTONIC (`if' & `by' == `by_value')"
-          // list `by' `xvar' `1'
-          local ub_`by_value' = "."
-          local lb_`by_value' = "."
-        }
-
-        else {
-        
-          qui bound_param if `by' == `by_value', xvar(`xvar') yvar(__surv) `s' `t' minmom(0) maxmom(100000)
-          local ub_`by_value' = 100000 - `r(mu_lower_bound)'
-          local lb_`by_value' = 100000 - `r(mu_upper_bound)'
-        }
+      /* check for monotonicity in entire x-variable group */
+      sort `by' `xvar'
+      cap assert __surv > __surv[_n-1] if `by' == `by_value' & `by'[_n-1] == `by_value'
+      if _rc {
+        noi di "WARNING: NON-MONOTONIC (`if' & `by' == `by_value')"
+        // list `by' `xvar' `1'
+        local ub_`by_value' = "."
+        local lb_`by_value' = "."
       }
-  
-      restore
 
-      /* create empty variable with result if doesn't exist yet */
-      cap gen `gen'_lb = .
-      cap gen `gen'_ub = .
-
-      /* set all result bounds */
-      foreach by_value in `by_values' {
-
-        // di "Bounds are: [" `lb_`by_value'' ", " `ub_`by_value'' "]"
+      else {
         
-        replace `gen'_lb = `lb_`by_value'' if `by' == `by_value' & `if'
-        replace `gen'_ub = `ub_`by_value'' if `by' == `by_value' & `if'
+        qui bound_param if `by' == `by_value', xvar(`xvar') yvar(__surv) `s' `t' minmom(0) maxmom(100000)
+        local ub_`by_value' = 100000 - `r(mu_lower_bound)'
+        local lb_`by_value' = 100000 - `r(mu_upper_bound)'
       }
     }
-    di "Created `gen'_lb and `gen'_ub."
-        capdrop __by
-}
+    
+    restore
+
+    /* create empty variable with result if doesn't exist yet */
+    cap gen `gen'_lb = .
+    cap gen `gen'_ub = .
+
+    /* set all result bounds */
+    foreach by_value in `by_values' {
+
+      // di "Bounds are: [" `lb_`by_value'' ", " `ub_`by_value'' "]"
+      
+      replace `gen'_lb = `lb_`by_value'' if `by' == `by_value' & `if'
+      replace `gen'_ub = `ub_`by_value'' if `by' == `by_value' & `if'
+
+      /* return the local values */
+      return local ub_`by_value' = `ub_`by_value''
+      return local lb_`by_value' = `lb_`by_value''
+    }
+  }
+
+  return local foo = 15
+  di "Created `gen'_lb and `gen'_ub."
+  capdrop __by
 end
 /* *********** END program bound_mort ***************************************** */
 
