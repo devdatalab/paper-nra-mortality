@@ -1,0 +1,93 @@
+\begin{landscape}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SCATTERS- 30, 40, 60, 70 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\foreach \n in {3,4,6,7}{
+  
+  \begin{figure}[H]
+    \caption{Total Mortality by Education Group Over Time, Age \n0-\n4}
+    \label{fig:mort_scatters_app}
+    \begin{center}
+  
+      \includegraphics[scale=1.2]{\mortdescpath/scatter_tmort_\n0}
+        \hline
+  
+  
+    \end{center}
+    \noindent
+    \footnotesize{The figure shows a scatterplot of total mortality
+      over time, for ages \n0-\n4.}
+  \end{figure}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TRENDS -- DEATHS OF DESPAIR %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[H]
+  \caption{Constant Composition Mortality Estimates, Ages 50--54,
+    1992-2015 \cnewline Deaths of Despair}
+  \label{fig:trend_despair_nomon}
+  \begin{center}
+
+    \includegraphics[scale=1.2]{\mortdescpath/new_joint_50_d_nomon_3}
+      \hline
+
+  \end{center}
+  \noindent
+  \footnotesize{The figure shows total mortality for age group 50-54,
+    divided into population subgroups who reflect constant sizes and
+    rank positions in the education distribution. The rank positions
+    are determined by the population distribution of education in
+    1992--the graph therefore shows changing mortality for the
+    subgroups of the population based on 1992 education levels, with
+    those rank positions held constant.}
+
+\end{figure}
+\end{landscape}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TRENDS -- 30, 40, 60, 70 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Table: Mortality Changes  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\caption{Change in Total Mortality, 1992--2015}
+\label{tab:all_mort}
+\begin{center}
+\textbf{Panel A: Non-Hispanic White Women} 
+\end{center}
+\begin{center}
+\small{\input{\mortdescpath/table_paper_changes_2_1_tmon-step}} 
+\end{center}
+\begin{center}
+\textbf{Panel B: Non-Hispanic White Men} 
+\end{center}
+\begin{center}
+\small{\input{\mortdescpath/table_paper_changes_1_1_tmon-step}}
+\end{center} 
+\begin{center}
+\textbf{Panel C: Non-Hispanic Black Women} 
+\end{center}
+\begin{center}
+\small{\input{\mortdescpath/table_paper_changes_2_2_tmon-step}}
+\end{center}
+\begin{center}
+\textbf{Panel D: Non-Hispanic Black Men} 
+\end{center}
+\begin{center}
+\small{\input{\mortdescpath/table_paper_changes_1_2_tmon-step}}
+\end{center}
+\end{table}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% hispanic identity %%
+%%%%%%%%%%%%%%%%%%%%%%%
+
+Other researchers have examined in detail whether Hispanic identity is
+reported differentially between death records and sample surveys, and
+have found these two data sources to be reliable and consistent on the
+question of Hispanic identity .
