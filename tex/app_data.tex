@@ -1,0 +1,183 @@
+This section provides additional details on data construction.  The
+All Cause Mortality file provided by the National Center for Health
+Statistics reports the number of deaths, by age, race, gender,
+education and state.
+
+\textbf{Mortality data.} Beginning in 2003, a substantial share of states only report
+educations in coarse bins. The bins are: 
+\begin{itemize}
+\item 8th grade or less
+\item 9th - 12th grade, no diploma
+\item High school graduate or GED 
+\item Some college, but no degree
+\item Associate degree
+\item Bachelor's degree
+\item Master's degree
+\item Doctorate or professional degree
+\item Unknown 
+\end{itemize}
+
+To reduce noise, we slightly coarsen the bins. We put the small share of people
+people with an 8th grade or less into the HS Dropouts group. We aggregate HS dropouts and
+middle-school dropouts due to concerns about statistical precision.
+
+We aggregate some college and Associate degrees into the Some College
+group; it is not clear which group would have
+higher rank or socioeconomic status on average. To reduce noise, we aggregate
+Bachelor's, Master's, and Doctorate/professional degrees. These
+aggregation choices are unlikely to affect our estimates of mortality
+at the bottom of the distribution. 
+
+We exclude deaths of foreign residents. 
+
+\textbf{Missing education.} Georgia, Oklahoma, Rhode
+Island, and South Carolina do not consistently report education data
+linked to the death certificates. Because
+their entry and exit from the data could bias mortality trends, we
+drop mortality records and population totals for these states. The
+mortality rates we report are thus mortality rates for the remaining states. 
+
+The remaining mortality records occasionally report missing
+education. In each age-gender-race-year category, we obtain the
+proportion of death records with non-missing educations belonging to
+each education group. We assign an education group to mortality
+records where education is missing, assuming that the missing
+distribution is the same as the non-missing distribution. For example,
+if 25\% of mortality records with non-missing education in a
+given cell have a high school degree only, we assign 25\% of the
+mortality records with missing education to have a high school
+degree. This practice is standard; see Case and Deaton
+(\citeyear{Case2015,Case2017}).
+
+Missing data cannot account for the large mortality changes
+described in the body of the paper. After dropping the four states, 2.90\% of
+white and 4.34\% of black mortality records are missing
+education (across all years). Roughly 20\% of missing deaths among
+whites (and 25\% among blacks) are assigned to high school
+dropouts; even in the extreme case where \textit{all} of these
+assignments were incorrect, it would erroneously assign only about 0.6\%
+of white and 1\% of black deaths to the bottom education bin, thus creating very
+little bias.\footnote{By 2000 and after, the share of missing data falls by
+  about a third. Thus, the trends over the past 18 years are even less subject to this
+  concern.} 
+
+\textbf{CPS.} Following \cite{Case2017}, we use the March
+CPS extracts prepared by the Center for Economic and Policy
+Research. 
+
+\textbf{Harmonizing educations.} A standard issue when harmonizing
+educational attainment data across several datasets is the treatment
+of people who drop out of high school in 12th grade. \citet{Jaeger1997}
+recommends treating 12th grade dropouts as people who complete
+high school, since in earlier datasets, people who complete part of
+12th grade were typically treated as people who completed
+high-school. Therefore, following \citet{Jaeger1997}'s advice, in the CPS and ACS data which
+have fine information about educational attainment, we code people who
+drop out of high school in 12th grade as completing high
+  school.\footnote{This is automatically implemented in CEPR's public-use CPS
+    data. When we augment the CPS data with the ACS data, we recode
+    CEPR's ACS education variable so it is consistent with the CPS
+    data.}
+
+Early mortality data reports years of
+school completed. Beginning in 2003, a share of states began reporting
+education in \textit{categories}, where one of the categories is
+9th--12th grade, no diploma. By 2018, all deaths are coded using the
+2003 categories. It is not possible to disaggregate the
+data further. Before 2003, the data only include years of high school
+(e.g., 1 year of high school or 4 years of high school). For the data
+coded using the pre-2003 categories, we consider dropouts to be people
+who attained less than 4 years of high school.
+
+We acknowledge a concern that beginning in 2003, we include people who
+attained some 12th grade education as dropouts. We emphasize that, due to
+the death certificate aggregation, there is no
+other way to harmonize the mortality data over time. However, this data
+limiation is unlikely to play a large role in our results. For example, in the 2018
+ACS, there are approximately 5 million people who have 12th grade, no
+diploma. By contrast, there are 86 million people who do not attain a
+high-school degree (and have no 12th grade education at all) and 70
+million people who attain a high-school diploma. As a result, the
+share of people who receive some 12th grade education but no degree
+represents 7\% or less of either group.
+
+\textbf{Moving averages.} Because we use
+small population cells (e.g., white high-school dropouts ages 30--34),
+to address noise, we use the moving 5-year average for the total population
+denominator when 5 years of data are available. In 1993 and 2017, we
+use the moving 3-year average (1992--1994 and 2016--2018,
+respectively). In 1992 and 2018, we use the predicted values from a
+regression of population totals on the adjacent years (1992--1994 and
+2016--2018, respectively). 
+\begin{itemize}
+\item We do not use the 1990 or 1991 CPS data because
+the education question changed in 1992, so the estimates of the
+dropouts population is discontinuous in 1991. 
+\item We do not use the 2019 or 2020 CPS because these extracts are
+  not yet harmonized by CEPR. 
+\end{itemize} 
+We pool annual data into 3-year bins to focus on long-term trends and minimize spurious year-on-year variation in results; e.g. for 1992--94, we use average CPS population in each group and the average number of deaths in each group.
+
+\textbf{Institutionalized populations.} The CPS does not survey
+institutionalized populations, e.g. people living in prisons or
+hospitals, but deaths in institutions are counted in the mortality
+records. To obtain accurate mortality rates, we generate
+institutionalized populations in each year as follows:
+\begin{enumerate} 
+\item We obtain counts of the institutionalized population by age,
+  education, gender, race, and year in the
+  U.S. Census (1990 and 2000) and American Communities Survey
+  (2006--2018). 
+\item For years between Censuses (1991--1999) or between the Census
+  and American Communities Survey (2001--2005), we impute the
+  number of institutionalized people in each
+  age-education-gender-race-year by generating a linear prediction of the
+  population between nearest surveys. We use the 2006 ACS because it
+  has more accurate counts of the institutionalized populations. For example, if there were 1,000
+  institutionalized white women aged 50--54 with a high school degree in
+  the 1990 Census and 1,200 in the 2000 Census, we would impute 1,100 in
+  1995 (where there is no Census available). 
+\item We add institutionalized populations to our count of the
+  non-institutionalized populations from the CPS. We compute mortality
+  rates as the number of deaths divided by the total population. 
+\end{enumerate}
+
+In the ages in our sample, this procedure gives that the share of the
+white (black) male institutionalized population was
+1.3\% (6.2\%) in 2018. The share of the white (black) female
+institutionalized population was 0.5\% (0.7\%). In order for errors
+from this imputation process to substantially bias
+mortality estimates, the institutionalized population would need to
+fluctuate non-linearly in the imputed years. Incarceration rates do rise
+substantially in the 1990s, but the change is close to linear over
+time, suggesting that the imputation is a good approximation.
+
+The 2018 CPS does not include people living in college dormitories. We
+do not adjust for this because we only consider the population older
+than age 25. 
+
+\textbf{Cause of deaths.} We partition all deaths into five groups:
+cancer, heart disease, deaths of despair, injuries, and other
+diseases. We construct these groups by using codes from the
+International Statistical Classification of Diseases and Related
+Health Problems. NCHS reports ICD-9 codes for 1992--1998 and ICD-10
+codes for 1999--2018. We list below the codes pertaining to each cause
+of death. For consistency, we follow the data appendix and public code
+from \citet{Case2017} to define deaths from cancer,
+heart disease, and deaths of despair.
+
+\begin{itemize}
+\item Cancer. ICD-9: 140--208; ICD-10: C (all). 
+\item Heart Disease. ICD-9: 390-429; ICD-10: I0--I9, I11, I13,
+  I20--I51. 
+\item Deaths of Despair. ICD-9: 571, 850--860, 950--959, 980; ICD-10:
+  K70, K73, K74, X40--45, Y10--15, Y45, Y47, Y49, Y87.0. 
+\item Injuries. ICD-9: 800-999 \& not a death of despair;
+  ICD-10: V, W, X, Y \& not a death of despair. 
+\item Other Diseases. All deaths not otherwise classified. 
+\end{itemize}
+
+Table~\ref{tab:icd_causes} reports the share of deaths among
+25--69-year-olds in 2018, ordered by importance. We report the
+categories used in the paper, and then disaggregate remaining deaths
+according to major ICD-10 categories.
