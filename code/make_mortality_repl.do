@@ -6,7 +6,8 @@
 /* FRONT MATTER: PATHS, PROGRAMS, AND TOOLS */
 /********************************************/
 
-// clear all
+/* clear any existing globals, programs, data to make sure they don't clash */
+clear all
 
 /* Stata programs required from SSC:
 ssc install unique
@@ -137,9 +138,6 @@ do $mcode/a/paper_stats.do
 
 /* comparison of naive and bounded mortality estimates for one group */
 do $mcode/a/figure_naive_compare.do
-
-/* intuitive graphs explaining how bounds work */
-shell python $mcode/a/graph_intuitive.py
 
 /* CEF graphs walking through method */
 do $mcode/a/plot_mort_cef.do
