@@ -1,0 +1,302 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{bbm}
+\usepackage[multiple]{footmisc}
+\usepackage{floatpag,amsmath,amsthm,amssymb}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% LOAD LOCAL COMPILATION PATHS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\HOME}{\string~}
+
+%% DON'T ADD NEW FILEPATH LINES -- CHANGE ~/include.tex INSTEAD
+\input{\HOME/include.tex}
+% defines mortalitypath, mobilitypath
+\input{\includepath/front_matter}
+
+\input{\mortalitypath/tex_constant.tex}
+
+\newcommand{\figpath}{\mobilitypath/figures}
+
+% disable hyperlinks, which were breaking on appendix references
+\usepackage[options]{nohyperref} 
+
+% add rotating figures
+\usepackage{rotating}
+
+% shrink figure captions
+\captionsetup[figure]{font=small}
+
+\title{Mortality Change Among Less Educated Americans \\ Additional Tables/Figures for Referees}
+\author{Paul Novosad\thanks{Dartmouth College,
+    paul.novosad@dartmouth.edu} \\ \\ Charlie Rafkin\thanks{MIT,
+    crafkin@mit.edu} \\ \\ Sam Asher\thanks{Johns Hopkins
+    University, sasher2@jhu.edu} \\ \\ }
+
+%%%%%%%%%%%%%%%%%%%%%% 
+% TITLE PAGE
+%%%%%%%%%%%%%%%%%%%%%% 
+\begin{document}
+\date{December 2020}
+
+\maketitle\thispagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure:      Main Mortality Estimates with 2013 and 2016     %
+%              White Women, White Men, Black Women, Black Men  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\thetable}{R\arabic{table}}
+\renewcommand{\thefigure}{R\arabic{figure}}
+\setcounter{table}{0}
+\setcounter{figure}{0}
+
+\begin{figure}[H]
+  \caption{Mortality Change in Constant Education
+    Percentiles \cnewline (1992--1994 to 2013--16 and to 2016--2018, All Ages)}
+  \label{fig:mort_main}
+  \begin{center}
+    \begin{tabular}{c}
+      \panel{\textbf{A. Non-Hispanic White Women}} \\
+      \includegraphics[scale=0.9]{\mortalitypath/changes-total-2013-2016-2-1} \\
+      \panel{\textbf{B. Non-Hispanic White Men}} \\
+      \includegraphics[scale=0.9]{\mortalitypath/changes-total-2013-2016-1-1} \\
+    \end{tabular}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \begin{tabular}{c}    
+      \panel{\textbf{C. Non-Hispanic Black Women}} \\
+      \includegraphics[scale=0.9]{\mortalitypath/changes-total-2013-2016-2-2} \\
+      \panel{\textbf{D. Non-Hispanic Black Men}} \\
+      \includegraphics[scale=0.9]{\mortalitypath/changes-total-2013-2016-1-2} \\
+    \end{tabular}
+  \end{center}
+  \vspace{-.5cm} \scriptsize{The graph shows changes in mortality by age, sex, race, and
+    constant percentile education bin. The vertical lines show the
+    bounded set containing the percentage change in the mortality rate
+    from 1992--1994 to 2016--2018 for the given age group. The faded lines show changes from 1992--1994 to 2013--2015, consistent with the prior manuscript. Source: NCHS, ACS, and CPS.}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FIGURE: CHANGES BY GROUP WITH ALL CAUSES OF MORTALITY %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+  \caption{Decomposition of Mortality Change from 1992--94 to 2013--16 and to 2016--18: \cnewline
+    Contribution of Deaths of Despair}
+  \label{fig:mort_causes}
+
+  \begin{center}
+    \panel{\textbf{A. Non-Hispanic White Women}} \\
+  \end{center}
+  \begin{center}
+    \includegraphics[scale=0.9]{\mortalitypath/changes-nod-2013-2-1} &
+  \end{center}
+
+  \begin{center}
+    \panel{\textbf{B. Non-Hispanic White Men}} \\
+  \end{center}
+  \begin{center}
+    \includegraphics[scale=0.9]{\mortalitypath/changes-nod-2013-1-1} \\
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \panel{\textbf{C. Non-Hispanic Black Women}} \\
+  \end{center}
+  \begin{center}
+    \includegraphics[scale=0.8]{\mortalitypath/changes-nod-2013-2-2} &
+  \end{center}
+  \begin{center}
+    \panel{\textbf{D. Non-Hispanic Black Men}} \\
+  \end{center}
+  \begin{center}
+    \includegraphics[scale=0.8]{\mortalitypath/changes-nod-2013-1-2} \\
+  \end{center}
+\scriptsize{Note: ``White'' refers to non-Hispanic white. The graph decomposes the change in total mortality from 1992--1994 to 2016--2018 into two parts: the change in total deaths driven by deaths of despair, and the change in total deaths driven by all other causes. Estimates are disaggregated by age, sex, race, and constant percentile education bin. The orange lines show bounds on the contribution to total mortality change driven by changes in deaths of despair. The value on the $Y$ axis is the amount that total mortality for each group would have changed if the rates of all deaths \textit{other} than deaths of despair were unchanged. The gray lines show the contribution to total mortality change driven by all causes of death \textit{other} than deaths of despair. Deaths of despair are deaths from suicide, poisoning, and chronic liver disease. The faded lines show changes from 1992--1994 to 2013--2015, consistent with the prior manuscript. Source: NCHS, ACS, CPS.}
+\end{figure}
+\vspace{-1cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: White Men %% %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+  \caption{Sensitivity Analysis: Non-Hispanic White Men}
+  \begin{center}
+    \vspace{-.6cm}
+    Panel A: 1992 Percentile Boundaries
+  \end{center}
+  \vspace{-1.4cm}
+  \begin{center}
+    \includegraphics[scale=1.1]{\mortalitypath/causes-1992-1-1} &
+  \end{center}
+
+  \begin{center}
+    \vspace{-.6cm}
+    Panel B: Within Race-Gender Percentiles
+  \end{center}
+  \vspace{-1.4cm}
+  \begin{center}
+    \includegraphics[scale=1.1]{\mortalitypath/causes-racesex-1-1} \\
+  \end{center}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \vspace{-.6cm}
+    Panel C: Allow Sheepskin Effects
+  \end{center}
+  %\vspace{-1.4cm}
+  \begin{center}
+    \includegraphics[scale=0.78]{\mortalitypath/causes-mon-step-1-1} &
+  \end{center}
+  \begin{center}
+    \vspace{-.6cm}
+    Panel D: No Smoothness Assumption
+  \end{center}
+  %\vspace{-1.4cm}
+  \begin{center}
+    \includegraphics[scale=0.78]{\mortalitypath/causes-nof2-1-1} \\
+  \end{center}
+\end{figure}
+\vspace{-1cm}
+\tiny{Note: The figure shows bounds on mortality change from 1992--1994 to 2016--2018, for non-Hispanic white men, by age and percentile education bin, under alternate assumptions from the main body of the paper. The figure is analogous to Panel A of Figure 6, but with different bounding assumptions. Panel A defines education bins boundaries according to education levels in 1992--1994. Panel B defines an individual's education percentile according to the individual's rank in the own-race and own-gender education distribution, rather than in the own-gender education distribution. Panel C allows sheepskin effects, by allowing kinks and discrete jumps at education boundaries (e.g. the rank separating dropouts from high school completers). Panel D estimates bounds on mortality without restricting the curvature of the mortality-education CEF.  The lines show the bounded set containing the percentage change in the mortality rate from 1992--1994 to 2016--2018 for the given group.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: White Women %% %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+  \caption{Sensitivity Analysis: Non-Hispanic White Women}
+  \begin{center}
+    \vspace{-.6cm}
+    Panel A: 1992 Percentile Boundaries
+  \end{center}
+  \vspace{-1.4cm}
+  \begin{center}
+    \includegraphics[scale=1.1]{\mortalitypath/causes-1992-2-1} &
+  \end{center}
+
+  \begin{center}
+    \vspace{-.6cm}
+    Panel B: Within Race-Gender Percentiles
+  \end{center}
+  \vspace{-1.4cm}
+  \begin{center}
+    \includegraphics[scale=1.1]{\mortalitypath/causes-racesex-2-1} \\
+  \end{center}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \vspace{-.6cm}
+    Panel C: Allow Sheepskin Effects
+  \end{center}
+  %\vspace{-1.4cm}
+  \begin{center}
+    \includegraphics[scale=0.78]{\mortalitypath/causes-mon-step-2-1} &
+  \end{center}
+  \begin{center}
+    \vspace{-.6cm}
+    Panel D: No Smoothness Assumption
+  \end{center}
+  %\vspace{-1.4cm}
+  \begin{center}
+    \includegraphics[scale=0.78]{\mortalitypath/causes-nof2-2-1} \\
+  \end{center}
+\end{figure}
+\vspace{-1cm}
+\tiny{Note: The figure shows bounds on mortality change from 1992--1994 to 2016--2018, for non-Hispanic white women, by age and percentile education bin, under alternate assumptions from the main body of the paper. The figure is analogous to Panel A of Figure 6, but with different bounding assumptions. Panel A defines education bins boundaries according to education levels in 1992--1994. Panel B defines an individual's education percentile according to the individual's rank in the own-race and own-gender education distribution, rather than in the own-gender education distribution. Panel C allows sheepskin effects, by allowing kinks and discrete jumps at education boundaries (e.g. the rank separating dropouts from high school completers). Panel D estimates bounds on mortality without restricting the curvature of the mortality-education CEF.  The lines show the bounded set containing the percentage change in the mortality rate from 1992--1994 to 2016--2018 for the given group.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: Black Men %% %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+  \caption{Sensitivity Analysis: Non-Hispanic Black Men}
+  \begin{center}
+    \vspace{-.6cm}
+    Panel A: 1992 Percentile Boundaries
+  \end{center}
+  \vspace{-1.4cm}
+  \begin{center}
+    \includegraphics[scale=1.1]{\mortalitypath/causes-1992-1-2} &
+  \end{center}
+
+  \begin{center}
+    \vspace{-.6cm}
+    Panel B: Within Race-Gender Percentiles
+  \end{center}
+  \vspace{-1.4cm}
+  \begin{center}
+    \includegraphics[scale=1.1]{\mortalitypath/causes-racesex-1-2} \\
+  \end{center}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \vspace{-.6cm}
+    Panel C: Allow Sheepskin Effects
+  \end{center}
+  %\vspace{-1.4cm}
+  \begin{center}
+    \includegraphics[scale=0.78]{\mortalitypath/causes-mon-step-1-2} &
+  \end{center}
+  \begin{center}
+    \vspace{-.6cm}
+    Panel D: No Smoothness Assumption
+  \end{center}
+  %\vspace{-1.4cm}
+  \begin{center}
+    \includegraphics[scale=0.78]{\mortalitypath/causes-nof2-1-2} \\
+  \end{center}
+\end{figure}
+\vspace{-1cm}
+\tiny{Note: The figure shows bounds on mortality change from 1992--1994 to 2016--2018, for non-Hispanic black men, by age and percentile education bin, under alternate assumptions from the main body of the paper. The figure is analogous to Panel A of Figure 6, but with different bounding assumptions. Panel A defines education bins boundaries according to education levels in 1992--1994. Panel B defines an individual's education percentile according to the individual's rank in the own-race and own-gender education distribution, rather than in the own-gender education distribution. Panel C allows sheepskin effects, by allowing kinks and discrete jumps at education boundaries (e.g. the rank separating dropouts from high school completers). Panel D estimates bounds on mortality without restricting the curvature of the mortality-education CEF.  The lines show the bounded set containing the percentage change in the mortality rate from 1992--1994 to 2016--2018 for the given group.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Figure: Black Women %% %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+  \caption{Sensitivity Analysis: Non-Hispanic Black Women}
+  \begin{center}
+    \vspace{-.6cm}
+    Panel A: 1992 Percentile Boundaries
+  \end{center}
+  \vspace{-1.4cm}
+  \begin{center}
+    \includegraphics[scale=1.1]{\mortalitypath/causes-1992-2-2} &
+  \end{center}
+
+  \begin{center}
+    \vspace{-.6cm}
+    Panel B: Within Race-Gender Percentiles
+  \end{center}
+  \vspace{-1.4cm}
+  \begin{center}
+    \includegraphics[scale=1.1]{\mortalitypath/causes-racesex-2-2} \\
+  \end{center}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \vspace{-.6cm}
+    Panel C: Allow Sheepskin Effects
+  \end{center}
+  %\vspace{-1.4cm}
+  \begin{center}
+    \includegraphics[scale=0.78]{\mortalitypath/causes-mon-step-2-2} &
+  \end{center}
+  \begin{center}
+    \vspace{-.6cm}
+    Panel D: No Smoothness Assumption
+  \end{center}
+  %\vspace{-1.4cm}
+  \begin{center}
+    \includegraphics[scale=0.78]{\mortalitypath/causes-nof2-2-2} \\
+  \end{center}
+\end{figure}
+\vspace{-1cm}
+\tiny{Note: The figure shows bounds on mortality change from 1992--1994 to 2016--2018, for non-Hispanic black women, by age and percentile education bin, under alternate assumptions from the main body of the paper. The figure is analogous to Panel A of Figure 6, but with different bounding assumptions. Panel A defines education bins boundaries according to education levels in 1992--1994. Panel B defines an individual's education percentile according to the individual's rank in the own-race and own-gender education distribution, rather than in the own-gender education distribution. Panel C allows sheepskin effects, by allowing kinks and discrete jumps at education boundaries (e.g. the rank separating dropouts from high school completers). Panel D estimates bounds on mortality without restricting the curvature of the mortality-education CEF.  The lines show the bounded set containing the percentage change in the mortality rate from 1992--1994 to 2016--2018 for the given group.}
+
+
+
+\end{document}
