@@ -1,0 +1,43 @@
+\begin{table}[H]
+  \caption{Bounds on Mortality Thoughout the Education Rank Distribution \cnewline 50--54-Year-Old Women, All Races}
+  \label{tab:bound_stats}
+  \begin{center}
+    \begin{tabular}{c}
+      \panel{A. 1992--1994} \\
+
+      \input{\mortalitypath/table_mort_stats_1992} \\
+      \\
+      
+      \panel{B. 2016--2018} \\
+      
+      \input{\mortalitypath/table_mort_stats_2016} \\
+      \hline
+    \end{tabular}
+\end{center}
+\end{table}
+\footnotesize{Note: ``White'' refers to non-Hispanic white and
+  ``black'' refers to non-Hispanic black. The table shows bounds on
+  mortality in 1992--94 (Panel A) and 2016--18 (Panel B) at various
+  ranks or rank ranges in the education distribution. The notation $Y(x=i)=E(Y|x=i)$
+  describes mortality at education percentile $i$, and $\mu_a^b$
+  describes average mortality between education percentiles $a$ and
+  $b$. $\overline{C}$ is the maximum percentage change in mortality
+  function curvature allowed in any one percentile that does not
+  correspond to an education bin boundary. Sources: ACS, CPS, and NCHS}
+
+
+\begin{table}[H]
+  \caption{Age-Adjusted Changes in All-Cause Mortality \cnewline by Education Percentile, 1992--94 to 2016--18}
+  \label{tab:mort_changes}
+  \begin{center}
+    \input{\mortalitypath/age_adjusted_all_cause}
+\end{center}
+\end{table}
+\footnotesize{Note: ``White'' refers to non-Hispanic white and
+  ``black'' refers to non-Hispanic black. The table shows the percent
+  change in all-cause mortality, defined as total deaths in a year
+  divided by population. To hold the population distribution constant,
+  we weight the age-specific mortality rates from the data with the
+  standardized U.S. population distribution for ages 25--69. We use
+  age-specific mortality rates from each period, but a single set of
+  weights for all periods.}
