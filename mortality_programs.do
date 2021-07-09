@@ -516,8 +516,8 @@ end
 cap prog drop gen_wt_ranks
 prog def gen_wt_ranks
 {
-  syntax varname [if], [GENerate(name) by(varname)] Weight(varname)
-  capdrop __rank __min_rank __max_rank __by __number_of_people
+  syntax varname [if], [GENerate(name) by(varname) correction] Weight(varname) 
+  capdrop __rank __min_rank __max_rank __by __number_of_people __smallest_rank_in_bin
 
   if mi("`weight'") {
     tempvar weight
@@ -552,12 +552,16 @@ prog def gen_wt_ranks
   /* within each variable group, obtain the minimum and maximum ranks */
   by `by' `1': egen __min_rank = min(__rank) `if'
   by `by' `1': egen __max_rank = max(__rank) `if'
-  
+  bys `by' `1' (__rank): gen __smallest_rank_in_bin = `weight'[1] 
+    
+  /* correction for minimum rank = max of previous bin */
+  replace __min_rank = __min_rank - __smallest_rank_in_bin 
+    
   /* replace the rank as the mean of those rolling sums, and divide by the number of people */
   gen `generate' = 100 * (__min_rank + __max_rank) / (2 * __number_of_people) `if'
   
   /* drop clutter */        
-  capdrop __rank __min_rank __max_rank __number_of_people __by 
+  capdrop __rank __min_rank __max_rank __number_of_people __by __smallest_rank_in_bin
 
 }
 end
