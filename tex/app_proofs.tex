@@ -1,0 +1,379 @@
+\subsubsection{Proof of Proposition \ref{eq:cef_bound}}
+Formalizing the set-up from the text, let $y \sim F$, where
+$F$ has support $[\underline{y},\overline{y}]$. Put $r_0 =
+\underline{y}$ and $r_{K+1} = \overline{y}$. In our benchmark case 
+where $y$ denotes survival rates, $F$ has support $[0,1]$. For simplicity we impose $F$ has
+finite support in all proofs below. The arguments are identical if $F$
+has infinite support except in the top or bottom bin, where the
+bounds must be adjusted slightly.\footnote{We focus on finite-support $F$ to lighten
+  notation. In practice for
+  the analyst, almost every distribution can be restricted with only
+  slight loss of generality to have finite support. For instance, if one
+  studies the CEF of wages given education, $\overline{y}$ can be set
+  to an implausibly high value.}
+
+\textit{Part 1: Find} $x_k^*$. First define $\mathcal{V}_k$ as the
+set of weakly increasing CEFs which meet the bin mean. Put
+otherwise, let $\mathcal{V}_k$ be the set of weakly increasing $v: [x_k,x_{k+1}] \to \mathbb{R}$
+satisfying $$r_k = 
+\frac{1}{x_{k+1} - x_k} \int_{x_k}^{x_{k+1}} v(x) dx.$$ 
+Now choose $z \in \mathcal{V}_k$ such that 
+$$
+z(x) = \begin{cases} 
+r_{k-1}, & x_k \leq x < j \\
+r_{k+1}, & j \leq x \leq x_{k+1}.
+\end{cases} 
+$$
+
+Note that $z$ and $j$
+both exist and are unique (it suffices to show that just $j$ exists
+and is unique, as then $z$ must be also). We can solve for $j$ by
+noting that $z$ lies in $\mathcal{V}_k$, so it must meet the bin mean. Hence, by
+evaluating the integrals, $j$ must satisfy: 
+\begin{align*}
+r_k &= \frac{1}{x_{k+1} - x_k} \int_{x_k}^{x_{k+1}} z(x) dx \\
+&= \frac{1}{x_{k+1} - x_k} \left(\int_{x_k}^{j} r_{k-1} dx
++  \int_{j}^{x_{k+1}} r_{k+1} dx \right) \\ 
+&= \frac{1}{x_{k+1} - x_k} \left( \left(j - x_k\right)
+r_{k-1} + \left(x_{k+1} - j\right) r_{k+1} \right). 
+\end{align*}
+Note that these expressions invoke assumption U, as the integration
+of $z(x)$ does not require any adjustment for the density on the $x$ axis. For a
+more general proof with an arbitrary distribution of $x$, see the
+following section. 
+
+With some algebraic manipulations, we obtain that $j =
+x_k^*$.
+
+\textit{Part 2: Prove the bounds.} 
+In the next step, we show that $x_k^*$ is the smallest point at which no
+$v \in \mathcal{V}_k$ can be $r_{k-1}$, which means that there must be some
+larger lower bound on $E(y | x)$ for $x \geq x_k^*$. In other words, we prove
+that $$x_k^* = \sup \Big\{x \vert \text{ there exists } v \in \mathcal{V}_k \text{
+such that
+} v(x) = r_{k-1}. \Big\}.$$ We must show that $x_k^*$ is an upper bound
+and that it is the least upper bound. 
+
+First, $x_k^*$ is an upper bound. Suppose that there exists $j' > x_k^*$ such
+that for some $w \in \mathcal{V}_k$, $w(j') = r_{k-1}$. Observe that by
+monotonicity and the bounds from \citet{Manski2002}, $w(x) =
+r_{k+1}$ for $x \leq j'$; in other words, if $w(j')$ is the mean of
+the mean of the prior bin, it can be no lower or higher than the mean
+of the prior bin up to point $j'$. But since $j' > j$, this means that 
+$$ \int_{x_k}^{j'} w(x)dx < \int_{x_k}^{j'} z(x) dx,$$ since $z(x) >
+w(x)$ for all $h \in (j,j')$. But recall that both $z$ and $w$ lie in
+$\mathcal{V}_k$ and must therefore meet the bin mean; i.e., 
+$$ \int_{x_k}^{x_{k+1}} w(x)dx = \int_{x_k}^{x_{k+1}}
+z(x)dx.$$ 
+But then $$\int_{j'}^{x_{k+1}} w(x)dx > \int_{j'}^{x_{k+1}} z(x)
+dx.$$ That is impossible by the bounds
+from \citet{Manski2002}, since $w(x)$ cannot exceed
+$r_{k+1}$, which is precisely the value of $z(x)$ for $x \geq j$. 
+
+Second, $j$ is the least upper bound. Fix $j' < j$. From the definition of $z$, we
+have shown that for some $h \in (j',j)$, $z(h) = r_{k-1}$ (and $z \in
+\mathcal{V}_k$). So any point $j'$ less than $j$ would not be a lower bound on the
+set --- there is a point $h$ larger than $j'$ such that $z(h) =
+r_{k-1}$. 
+
+Hence, for all $x < x_k^*$, there exists a function $v \in \mathcal{V}_k$ such
+that $v(x) = r_{k-1}$; the lower bound on $E(y | x)$ for $x < x_k^*$
+is no greater than $r_{k-1}$. By choosing $z'$ with 
+$$ 
+z'(x) = \begin{cases} 
+r_{k-1}, & x_k \leq x \leq j \\
+r_{k+1}, & j < x \leq x_{k+1}, 
+\end{cases} 
+$$ 
+it is also clear that at $x_k^*$, the lower bound is no larger 
+than $r_{k-1}$ (and this holds in the proposition itself, substituting in
+$x_k^*$ into the lower bound in the second equation).
+
+Now, fix $x' \in (x_k^*, x_{k+1}]$. Since $x_k^*$ is the supremum, there
+is no function $v \in \mathcal{V}_k$ such that $v(x') = r_{k-1}$. Thus for
+$x' > x_k^*$, we seek a sharp lower bound larger than $r_{k-1}$. Write this lower bound as
+$$Y_{x'}^{min} = \min \Big\{ v(x') \text{ for all  } v \in \mathcal{V}_k \Big\},$$
+where $Y_{x'}^{min}$ is the smallest value attained by any function $v \in \mathcal{V}_k$ at the point
+$x'$. 
+
+We find this $Y_{x'}^{min}$ by choosing the function which maximizes
+every point after $x'$, by attaining the value of the
+subsequent bin. The function which minimizes $v(x')$ must be a
+horizontal line up to this point. 
+
+Pick $\tilde{z} \in \mathcal{V}_k$ such that 
+$$ 
+\tilde{z}(x) = \begin{cases}
+\underline{Y}, &x_k \leq x' \\
+r_{k+1}, &x' < x_{k+1} 
+\end{cases}. 
+$$
+By integrating $\tilde{z}(x)$, we claim that $\underline{Y}$ satisfies the following: 
+$$ \frac{1}{x_{k+1} - x_k} \left( \left(x' - x_k\right) \underline{Y} + \left(x_{k+1} -
+x'\right) r_{k+1}\right) = r_k .$$ As a result, $\underline{Y}$ from this expression exists and is unique,
+because we can solve the equation. Note that this integration step
+also requires that the distribution of $x$ be uniform, and we
+generalize this argument in the following section. 
+
+By similar reasoning as above, there
+is no $Y' < \underline{Y}$ such that there exists $w \in \mathcal{V}_k$ with 
+$w(x') = Y'$. Otherwise there must be some point $x
+> x'$ such that $w(x') > r_{k+1}$ in order that $w$ matches the bin
+means and lies in $\mathcal{V}_k$; the expression
+for $\underline{Y}$ above maximizes every point after $x'$, leaving no
+additional room to further depress $\underline{Y}$. 
+
+Formally, suppose there exists $w \in \mathcal{V}_k$ such that $w(x') =
+Y' < \underline{Y}$. Then $w(x') < \tilde{z}(x')$ for all $x < x'$, since $w$ is
+monotonic. As a result, $$\int_{x_k}^{x'}\tilde{z}(x)dx
+>  \int_{x_k}^{x'}w(x)dx.$$ But recall that 
+$$\int_{x_k}^{x_{k+1}} w(x) dx = \int_{x_k}^{x_{k+1}} \tilde{z}(x) dx,$$ so 
+$$\int_{x'}^{x_{k+1}} w(x) dx > \int_{x'}^{x_{k+1}} \tilde{z}(x) dx. $$ This is
+impossible, since $\tilde{z}(x) = r_{k+1}$ for all $x > x'$, and
+by \citet{Manski2002}, $w(x) \leq r_{k+1}$ for all $w \in \mathcal{V}_k$. Hence there
+is no such $w \in \mathcal{V}_k$, and therefore $\underline{Y}$ is smallest possible
+value at $x'$, i.e. $\underline{Y} = Y_{x'}^{min}$.
+
+By algebraic manipulations, the expression for $\underline{Y} = Y_{x}^{min}$ reduces
+to $$Y_{x}^{min} = \frac{ \left(x_{k+1} - x_k\right) r_k  - (x_{k+1}
+- x) r_{k+1}}{x - x_k}, \ x \geq x_k^*.$$  
+
+The proof for the upper bounds uses the same structure as the proof of the lower bounds.
+
+Finally, the body of this proof gives sharpness of the bounds. For we
+have introduced a CEF $v \in \mathcal{V}_k$ that obtains the value of the upper and lower
+bound for any point $x \in [x_k,x_{k+1}]$. For any value $y$ within the
+bounds, one can generate a CEF $v \in \mathcal{V}_k$ such that $v(x) =
+y$. \qed
+
+\vspace{1em}
+
+\vspace{2em}
+
+\subsubsection{Analytical Bounds when Uniformity Does Not Hold} 
+Suppose we relax
+assumption $U$. We continue to impose for notational simplicity that $x$ is drawn
+from a continuous distribution, though similar arguments apply to discrete
+$x$. We characterize $x$ by some known probability
+density function, which we assume is integrable in every bin
+$k$. Then we derive the following bounds. 
+
+\begin{proposition} 
+\label{eq:bound_arb_distrib}
+Let $x$ be in bin $k$. For simplicity we work with continuous
+distributions of $x$. Let $f_k(x)$ be the probability density function
+of $x$ in bin $k$. Under assumptions M, I, MI \citep{Manski2002}, and
+without additional information, the
+following bounds on $E(y \vert x)$ are sharp:
+$$
+\begin{cases}                                                                                                                          
+r_{k-1} \leq E(y \vert x) \leq \frac{r_k - r_{k-1} \int_{x_{k}}^x
+  f_k(s)ds}{\int_x^{x_{k+1}}f_k(s)ds}, & x < x_k^*      \\           
+\frac{r_k - r_{k+1}\int_x^{x_{k+1}} f_k(s)ds }{\int_{x_k}^x f_k(s)ds}  \leq E(y \vert x)  \leq                                                                         
+r_{k+1} , & x \geq x_k^*                                                                                                             
+\end{cases}
+$$
+where $x_k^*$ satisfies: 
+$$r_k = r_{k-1} \int_{x_k}^{x_k^*} f_k(s) ds + r_{k+1}
+\int_{x_k^*}^{x_{k+1}} f_k(s) ds.$$ 
+\end{proposition} 
+
+The proof follows the same argument as in Proposition
+\ref{eq:cef_bound}. With an arbitrary distribution, $\mathcal{V}_k$ now
+constitutes the functions $v: [x_k,x_{k+1}] \to \mathbb{R}$ which satisfy: 
+$$ \int_{x_k}^{x_{k+1}} v(s)f_k(s) ds = r_k.$$ 
+
+As before, choose $z \in \mathcal{V}_k$ such that 
+$$
+z(x) = \begin{cases} 
+r_{k-1}, & x_k \leq x < j \\
+r_{k+1}, & j \leq x \leq x_{k+1}. 
+\end{cases}
+$$
+
+Because the distribution of $x$ is no longer uniform, $j$ must now satisfy 
+\begin{align*}
+r_k &= \int_{x_k}^{x_{k+1}} z(s)f_k(s) ds \\ 
+&= r_{k-1} \int_{x_k}^j f_k(s)ds + r_{k+1} \int_{j}^{x_{k+1}}
+f_k(s)ds. 
+\end{align*} 
+This implies that $j = x_k^*$, precisely. 
+
+The rest of the arguments follow identically, except we now claim that
+for $x > x_k^*$, 
+$\underline{Y} = Y_{x}^{min}$ satisfies the following: 
+$$ r_k = \int_{x_k}^{x} Y_{x}^{min} f_k(s)ds + \int_{x}^{x_{k+1}}
+r_{k+1} f_k(s)ds.$$ 
+
+By algebraic manipulations, we obtain: 
+$$ Y_{x}^{min}= \frac{r_k - r_{k+1} \int_{x}^{x_{k+1}}
+f_k(s)ds}{\int_{x_k}^{x}  f_k(s)ds}$$ and the proof of the lower
+bounds is complete. As before, the proof for upper bounds follows from identical logic. \qed 
+
+\subsubsection{Bounds on $\mu_a^b$}
+Define $$  \mu_a^{b} = \frac{1}{b - a} \int_a^{b} E(y | x) di. $$ Let
+$Y_x^{min}$ and $Y_x^{max}$ be the lower and upper bounds respectively
+on $E(y | x)$ given by Proposition \ref{eq:cef_bound}. 
+We seek to bound $\mu_a^b$ when $x$ is observed only in discrete intervals. 
+
+\begin{proposition}
+  \label{eq:mu} 
+  Let $b \in [x_k, x_{k+1}]$ and $a \in [x_h, x_{h+1}]$ with $a<b$. Let
+  assumptions M, I, MI \citep{Manski2002} and U hold. Then, if there is no
+  additional information available, the
+  following bounds are sharp: 
+  \label{eq:bound_mu} 
+$$ 
+  \begin{cases} 
+     Y_b^{min} \leq \mu_a^b \leq Y_a^{max}, & h = k \\
+    \frac{r_h (x_k - a) + Y_b^{min}(b - x_k)}{b-a} \leq
+    \mu_a^b \leq \frac{Y_a^{max} (x_k - a) + r_k
+      (b-x_k)}{b-a}, & h +
+    1 = k \\
+    \frac{r_h (x_{h+1} - a) + \sum_{\lambda = h+1}^{k-1} r_{\lambda}
+      (x_{\lambda+1} - x_{\lambda}) + Y_b^{min}(b - x_k)}{b-a} \leq
+    \mu_a^b 
+    %% \ \ \ \ \ \ \ \ \ \ \ \ %%
+    \leq \frac{Y_a^{max} (x_{h+1} - a) + \sum_{\lambda = h+1}^{k-1} r_{\lambda}
+      (x_{\lambda+1} - x_{\lambda}) + r_k (b-x_k)}{b-a}, & h +
+    1 < k. 
+  \end{cases} 
+$$ 
+\end{proposition} 
+
+The order of the proof is as follows. If $a$ and $b$ lie in the same
+bin, then $\mu_a^b$ is maximized only if the CEF is minimized prior to
+$a$. As in the proof of proposition \ref{eq:cef_bound}, that occurs when
+the CEF is a horizontal line at $Y_x^{min}$ up to $a$, and a
+horizontal line $Y_x^{max}$ at and after $a$. If $a$ and $b$ lie in separate bins, the
+value of the integral in bins that are contained between $a$ and $b$ is determined by
+the observed bin means. The portions of the integral that are not
+determined are maximized by a similar logic, since they both lie
+within bins. We prove the bounds for
+maximizing $\mu_a^b$, but the proof is symmetric
+for minimizing $\mu_a^b$. 
+
+\textit{Part 1: Prove the bounds if $a$ and $b$ lie in the same bin.} We
+seek to maximize $\mu_a^b$ when $a, b \in [x_k,x_{k+1}]$. This
+requires finding a candidate CEF $v \in \mathcal{V}_k$ which maximizes $\int_a^b
+v(x) dx$. Observe that the function
+$v(x)$ defined as $$ v(x) = \begin{cases}
+Y_a^{min}, &x_k \leq x < a \\ 
+Y_a^{max}, &a \leq x \leq x_{k+1} 
+\end{cases}
+$$ 
+has the property that $v \in \mathcal{V}_k$. For if $a \geq x_k^*$, $v = \tilde{z}$
+from the second part of the proof of
+proposition \ref{eq:cef_bound}. If $a < x_k^*$, the CEF in $\mathcal{V}_k$ which
+yields $Y_a^{max}$ is precisely $v$ (by a similar argument which delivers the upper bounds in
+proposition \ref{eq:cef_bound}). 
+
+This CEF maximizes $\mu_a^b$, because
+there is no $w \in \mathcal{V}_k$ such that $$\frac{1}{b-a} \int_{a}^{b}
+w(x) dx > \frac{1}{b-a}
+\int_{a}^{b} v(x)dx.$$ Note that for any $w \in \mathcal{V}_k$, $\frac{1}{x_{k+1} - x_k} \int_{x_k}^{x_{k+1}} w(x)dx =
+\frac{1}{x_{k+1} - x_k} \int_{x_k}^{x_{k+1}} v(x)dx = r_k$. Hence in
+order that $\int_{a}^{b} w(x)dx > \int_{a}^{b} v(x)dx$, there are two
+options. The first option is that $$ \int_{x_k}^{a}
+w(x)dx < \int_{x_k}^{a} v(x)dx.$$ That is impossible, since there is
+no room to depress $w$ given the value of $v$ after $a$. If $a < x_k^*$, then it is
+clear that there is no $w$ giving a larger $\mu_a^b$, since
+$r_{k-1} \leq w(x)$ for $x_{k-1} \leq x \leq a$, so $w$ is bounded below by $v$. If $a \geq x_k^*$, then $v(x) = r_{k+1}$ for all $a \leq x \leq
+x_{k+1}$. That would leave no room to depress $w$ further; if $ \int_{x_k}^{a}
+w(x)dx < \int_{x_k}^{a} v(x)dx$, then $\int_{a}^{x_{k+1}} w(x) dx
+> \int_{a}^{x_{k+1}} v(x) dx $, which cannot be the case if $v =
+r_{k+1}$, by the bounds given in \citet{Manski2002}. 
+
+The second option is that $$ \int_{b}^{x_k}
+w(x)dx < \int_{b}^{x_k}
+v(x)dx .$$ This is impossible due to monotonicity. For if $ \int_{a}^{b}
+w(x)dx > \int_{a}^{b}
+v(x)dx$, then there must be some point $x' \in [a,b)$ such that $w(x')
+> v(x')$. By monotonicity, $w(x) > v(x)$ for all $x \in [x',x_{k+1}]$
+since $v(x) =Y_a^{max}$ in that interval. As a result,  $$ \int_{b}^{x_k}
+w(x)dx > \int_{b}^{x_k}
+v(x)dx,$$ since $b \in (x',x_{k+1})$. (If $b = x_{k+1}$, then only the
+first option would allow $w$ to maximize the desired $\mu_a^b$.) 
+
+Therefore, there is no such $w$, and $v$ indeed maximizes the desired integral. Integrating $v$ from
+$a$ to $b$, we obtain that the upper bound on $\mu_a^b$ is
+$\frac{1}{b-a} \int_a^b Y_a^{max} dx = Y_a^{max}$. Note that there may
+be many functions which maximize the integral; we only needed to show
+that $v$ is one of them. 
+
+To prove the lower bound, use an analogous argument. 
+
+\textit{Part 2: Prove the bounds if $a$ and $b$ do not lie in the same
+bin.} We now generalize the set up and permit $a,b \in [0,100]$. Let
+  $\mathcal{V}$ be the set of weakly increasing functions such that $\frac{1}{x_{k+1} -
+  x_k} \int_{x_k}^{x_{k+1}}
+v(x) dx = r_k$ for all $k \leq K$. In other words, $\mathcal{V}$ is the set of
+  functions which match the means of every bin. Now observe that for all $v \in \mathcal{V}$, 
+\begin{align*}
+\mu_a^b &= \frac{1}{b-a}\int_a^b v(x) dx \\ 
+&= \frac{1}{b-a} \left(
+\int_a^{x_{h+1}} v(x)dx + \int_{x_{h+1}}^{x_k} v(x)dx +
+\int_{x_k}^{b} v(x) dx \right), 
+\end{align*} 
+by a simple expansion of the integral. 
+
+But for all $v \in \mathcal{V}$, $$\int_{x_{h+1}}^{x_k} v(x)dx = \sum_{\lambda =
+  h+1}^{k-1} r_{\lambda}
+    (x_{\lambda+1} - x_{\lambda})$$ if $h + 1 <k$
+and $$\int_{x_{h+1}}^{x_k} v(x)dx = 0$$ if $h + 1 = k$. For in
+  bins completely contained inside $[a,b]$, there is no room for any
+  function in $\mathcal{V}$ to vary; they all must meet the bin means. 
+
+We proceed to prove the upper bound. We split this into two portions:
+we wish to maximize $\int_a^{x_{h+1}}v(x)dx $ and we also wish to maximize $\int_{x_k}^b v(x)dx $. The values of
+these objects are not codependent. But observe that the CEFs $v \in
+\mathcal{V}_k$ which yield upper bounds on these integrals are the very same functions which yield upper bounds on
+$\mu_a^{x_{h+1}} $ and $\mu_{x_k}^b$, since $\mu_s^t
+= \frac{1}{t-s} \int_s^t v(x) dx$ for any $s$ and $t$. Also notice
+that $a$ and $x_{h+1}$ both lie in bin $h$, while $b$ and $x_k$ both
+lie in bin $k$, so we can make use of 
+the first portion of this proof. 
+
+In part 1, we showed that the function $v \in \mathcal{V}$, 
+$v:[x_h,x_{h+1}] \to \mathbb{R}$, which maximizes $\mu_a^{x_{h+1}}
+$ is
+$$ v(x) = \begin{cases}
+Y_a^{min}, & x_{h} \leq x < a \\
+Y_a^{max}, & a \leq x \leq x_{h+1}. 
+\end{cases}
+$$ 
+As a result $$\underset{v \in \mathcal{V}}{\max}\Bigg\{ \int_a^{x_{h+1}} v(x) dx \Bigg\} = \int_a^{x_{h+1}} Y_a^{max} dx = Y_a^{max} (x_{h+1} -a).$$
+
+Similarly, observe that $x_k$ and $b$ lie in the same bin, so the function
+$v:[x_k,x_{k+1}] \to \mathbb{R}$, with $v \in \mathcal{V}$  which maximizes $\int_{x_k}^b v(x)dx$ must be of the form 
+$$ v(x) = \begin{cases}
+Y_{x_k}^{min}, & x_{k} \leq x < a \\
+Y_{x_k}^{max}, & b \leq x \leq x_{k+1}. 
+\end{cases}
+$$ 
+
+With identical logic, 
+$$\underset{v \in \mathcal{V}}{\max}\Bigg\{ \int_{x_k}^{b} v(x) dx \Bigg\}
+= \int_{x_k}^{b} Y_{x_k}^{max} dx = Y_{x_k}^{max} (b -x_k).$$
+And by proposition \ref{eq:cef_bound}, $x_k \leq x_k^*$ so $Y_{x_k}^{max} =
+r_{k}$. (Note that if $x_k = x_k^*$, substituting $x_k^*$ into the second
+expression of proposition \ref{eq:cef_bound} still yields that
+$Y_{x_k}^{max} = r_k$.) 
+
+Now we put all these portions together. First let $h + 1 = k$. Then
+$\int_{x_{h+1}}^{x_k} v(x) dx = 0$, so 
+we maximize $\mu_a^b$ by
+$$\frac{1}{b-a} \left( Y_a^{max} (x_{h+1} -a) + r_k (b
+-x_k) \right). $$ Similarly, if $h +1 < k$ and there are entire bins completely
+contained in $[a,b]$, then we maximize $\mu_a^b$ by 
+$$\frac{1}{b-a} \left( Y_a^{max} (x_{h+1} -a) + \sum_{\lambda =
+  h+1}^{k-1} r_{\lambda}
+    (x_{\lambda+1} - x_{\lambda}) + r_k  (b -x_k) 
+\right). $$ 
+
+The lower bound is proved analogously. Sharpness is immediate, since
+we have shown that the CEF which delivers the endpoints of the
+bounds lies in $\mathcal{V}$. As a result, there is a function delivering any intermediate
+value for the bounds. \qed 
+
+\vspace{1em}

@@ -1,3 +1,7 @@
+/* DELETE THIS LINE */
+cd ~/ddl/paper-nra-mortality/
+/* END DELETE */
+
 clear
 
 /* set the following globals:
@@ -6,7 +10,7 @@ mdata: path to data [intermediate data files will be put here too] */
 
 global out /scratch/pn/mort-test/out
 global tmp /scratch/pn/mort-test/tmp
-global mdata /scratch/pn/mort-test/dta
+global mdata /scratch/pn/mort-test
 
 if mi("$out") | mi("$tmp") | mi("$mdata") {
   display as error "Globals 'out', 'tmp', and 'mdata' must be set for this to run."
@@ -25,13 +29,14 @@ adopath + ado
 cap log close
 log using $out/nra_mortality.log, text replace
 
-/* store current path */
+/* store current path (assumed to be repo root folder) */
 global mcode = "`c(pwd)'"
 
 /* create new folders */
 cap mkdir $mdata/tmp
-cap mkdir $mdata/int/bounds
-cap mkdir $mdata/int/matlab_inputs
+foreach f in bounds nchs matlab_inputs {
+  cap mkdir $mdata/int/`f'
+}
 
 /* run different subcomponents of the build */
 
