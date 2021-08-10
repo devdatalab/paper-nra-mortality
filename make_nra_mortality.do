@@ -43,18 +43,12 @@ foreach f in bounds nchs matlab_inputs {
 /* run different subcomponents of the build */
 
 /*********************************************************/
-/* 1. Build restricted NCHS data including matlab inputs */
+/* 1. Build mortality file from restricted NCHS data     */
 /*********************************************************/
-/* [for CR: is this just prep_mort_rates_all.do?? ] */
-do $mcode/make_nchs_mortality
-
-/**************************************/
-/* 2. Build all public ancillary data */
-/**************************************/
-do $mcode/make_ancillary_data
+do $mcode/make_mortality_data
 
 /***************************************/
-/* 3. Prepare inputs for Matlab solver */
+/* 2. Prepare inputs for Matlab solver */
 /***************************************/
 
 /* create mortality moments for NHIS analysis */
@@ -64,12 +58,12 @@ do $mcode/b/mort_moments.do
 do $mcode/b/prep_matlab_inputs.do
 
 /********************************************/
-/* 4. Run all versions of the Matlab solver */
+/* 3. Run all versions of the Matlab solver */
 /********************************************/
 do $mcode/run_matlab_solver.do
 
 /************************************************************/
-/* 5. Process solver output and generate all paper results  */
+/* 4. Process solver output and generate all paper results  */
 /************************************************************/
 do $mcode/make_results.do
 
