@@ -37,8 +37,10 @@ end
 
 set more off
 
-use "$mdata/raw/acs/1990.dta", clear 
-
+/* This dataset comes directly from the raw IPUMS download.
+It is extracted from a .dta.gz file*/
+use "$mdata/raw/acs/usa_00018.dta", clear 
+assert year == 1990 
 set more off
 
 replace hhwt     = hhwt     
@@ -51,7 +53,7 @@ format perwt    %10.2f
 format slwt     %10.2f
 
 label var year     `"Census year"'
-label var datanum  `"Data set number"'
+label var sample  `"Data set number"'
 label var serial   `"Household serial number"'
 label var hhwt     `"Household weight"'
 label var region   `"Census region and division"'
