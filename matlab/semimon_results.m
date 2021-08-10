@@ -122,6 +122,5 @@ end
 fclose(f);
 
 %% convert the CSV to a latex table using a template
-%% !python ~/ddl/stata-tex/table_from_tpl.py -t ~/ddl/mortality/a/tpl/semimon_bounds.tpl -o ~/iec/output/mort_new/semimon_bounds.tex -r ~/iec/output/mort_new/semimon_bounds.csv
 pycall = sprintf("python ../stata-tex/table_from_tpl.py -t ../a/tpl/semimon_bounds.tpl -o %s/semimon_bounds.tex -r %s/semimon_bounds.csv", graph_path, graph_path)
 system(pycall);

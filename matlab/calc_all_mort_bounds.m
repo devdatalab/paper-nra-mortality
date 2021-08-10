@@ -4,7 +4,7 @@ WARNING: THIS FILE MAY BE OBSOLETE, SINCE WE'RE USING THE PARALLEL VERSION NOW
 %% every specification used in the paper
 
 %% tell matlab where to find the solver 
-addpath('~/ddl/mortality/mort-solver')
+addpath('../mort-solver')
 
 %% COMPLETE FUNCTION CALL
 %% this generates all possible specs but takes a long time. so instead

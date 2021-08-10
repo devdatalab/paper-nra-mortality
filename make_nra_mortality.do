@@ -7,7 +7,6 @@ clear
 /* set the following globals:
 $out: path for output files to be created
 mdata: path to data [intermediate data files will be put here too] */
-
 global out /scratch/pn/mort-test/out
 global tmp /scratch/pn/mort-test/tmp
 global mdata /scratch/pn/mort-test
@@ -16,6 +15,9 @@ if mi("$out") | mi("$tmp") | mi("$mdata") {
   display as error "Globals 'out', 'tmp', and 'mdata' must be set for this to run."
   error 1
 }
+
+/* IMPORTANT: set Matlab paths in matlab/set_matlab_paths.m */
+
 
 /* load Stata programs */
 qui do tools.do
