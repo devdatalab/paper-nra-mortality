@@ -13,8 +13,6 @@ cd $mcode
 do $mcode/b/prep_cps  
 
 #delimit cr
-do $mcode/b/raw_census_1990.do
-do $mcode/b/raw_census_2000.do
 do $mcode/b/prep_census_1990.do
 do $mcode/b/prep_census_2000.do
 
