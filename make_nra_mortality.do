@@ -36,11 +36,9 @@ global mcode = "`c(pwd)'"
 
 /* create new folders */
 cap mkdir $mdata/tmp
-foreach f in bounds nchs matlab_inputs {
+foreach f in bounds nchs matlab_inputs nchs/clean {
   cap mkdir $mdata/int/`f'
 }
-
-/* run different subcomponents of the build */
 
 /*********************************************************/
 /* 1. Build mortality file from restricted NCHS data     */

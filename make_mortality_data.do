@@ -28,7 +28,7 @@ do $mcode/b/prep_institutionalized.do
 /**************/
 /* BUILD NHIS */
 /**************/
-/* nhis build code (bash script that calls everything) */
+
 #delimit cr
 
 * !bash $mcode/nhis/make.bash  // this is the master bash file that also builds the dofiles, but easier to just call the stata dofiles
