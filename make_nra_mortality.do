@@ -36,32 +36,34 @@ global mcode = "`c(pwd)'"
 
 /* create new folders */
 cap mkdir $mdata/tmp
-foreach f in bounds nchs matlab_inputs nchs/clean {
+foreach f in bounds nchs nhis matlab_inputs nhis/clean {
   cap mkdir $mdata/int/`f'
 }
 
 /*********************************************************/
 /* 1. Build mortality file from restricted NCHS data     */
 /*********************************************************/
-do $mcode/make_mortality_data
+// do $mcode/make_mortality_data
+
+/*********************/
+/* 2. Prep NHIS data */
+/*********************/
+do $mcode/make_nhis
 
 /***************************************/
-/* 2. Prepare inputs for Matlab solver */
+/* 3. Prepare inputs for Matlab solver */
 /***************************************/
-
-/* create mortality moments for NHIS analysis */
-do $mcode/b/mort_moments.do
 
 /* prepare the inputs for the matlab mort-solver */
 do $mcode/b/prep_matlab_inputs.do
 
 /********************************************/
-/* 3. Run all versions of the Matlab solver */
+/* 4. Run all versions of the Matlab solver */
 /********************************************/
 do $mcode/run_matlab_solver.do
 
 /************************************************************/
-/* 4. Process solver output and generate all paper results  */
+/* 5. Process solver output and generate all paper results  */
 /************************************************************/
 do $mcode/make_results.do
 
