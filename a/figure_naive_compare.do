@@ -1,7 +1,7 @@
 /* goal: compare naive mortality change to bounds on mortality change */
 
 /* 0. identify bin boundaries for the naive graphs -- as close to 1992 boundaries as possible. */
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 egen year_bin = cut(year), at(1992(3)2019)
 collapse (mean) tpop_rolling tmort *rate ed_rank_* cum_ed_rank_*, by(year_bin age sex race edclass)
 ren year_bin year
@@ -10,7 +10,7 @@ list edclass cum_ed_rank_sex if year == 1992 & sex == 2 & race == 1 & age == 45
 list edclass cum_ed_rank_sex if year == 1992 & sex == 2 & race == 1 & age == 50
 
 /* 1. open naive tmortrate estimates for some group from 1992 to 2018 */
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 keep year sex race age edclass tmortrate dmortrate cum_ed_rank_sex
 
 /* collapse into 3-year means */

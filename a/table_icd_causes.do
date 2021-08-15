@@ -1,5 +1,5 @@
 /* create causes appendix table */
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 
 keep if year == 2018
 global mort_partition tmort icd10*mort amort cmort dmort clmort cdmort hmort 
@@ -59,7 +59,7 @@ exit
 exit
 exit
  
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 
 /* explore 40-year-old black male mortality change */
 keep if race == 2 & sex == 1 & inlist(year, 1992, 2015) & edclass == 4
@@ -85,7 +85,7 @@ gen change = y2015 - y1992
 list if age == 40
 
 
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 
 global mort_partition tmort icd10*mort amort cmort dmort clmort cdmort hmort 
 collapse (sum) $mort_partition  [aw=tpop_rolling], by(age year)

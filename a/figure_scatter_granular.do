@@ -1,4 +1,4 @@
-use $mdata/int/nchs/appended_rank_mort, clear 
+use $mdata/mort/nchs/appended_rank_mort, clear 
 
 /* finish collapse and shrink new stuff */
 save $tmp/mort_clean_nchs_granular, replace

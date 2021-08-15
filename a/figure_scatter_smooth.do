@@ -1,4 +1,4 @@
-use $mdata/int/nchs/appended_rank_mort, clear 
+use $mdata/mort/nchs/appended_rank_mort, clear 
 
 /* collapse to 3-year-bins */
 egen year_bin = cut(year), at(1992(3)2019)

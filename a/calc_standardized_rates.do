@@ -51,7 +51,7 @@ save $std/std-pop-69-5, replace
 /*************************************************************************/
 /* create age-adjusted mortality rates from standardized u.s. population */
 /*************************************************************************/
-use $mdata/int/nchs/appended_rank_mortgranage, clear
+use $mdata/mort/nchs/appended_rank_mortgranage, clear
 drop _merge
 
 merge m:1 age using $std/std-pop-79-1
@@ -76,7 +76,7 @@ collapse (mean) tmortrate dmortrate [aw=std_pop], by(sex race edclass year)
 save $std/mort_std_1_25_69, replace
 
 /* repeat using 5-year death rates */
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 drop _merge
 ren age_gp age
 merge m:1 age using $std/std-pop-79-5
@@ -155,7 +155,7 @@ cat $f
 /*********************************************/
 /* calculate summary statistics for abstract */
 /*********************************************/
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 
 /* collapse to get total deaths, total population */
 collapse (sum) tmort tpop_rolling, by(sex)
@@ -163,7 +163,7 @@ format tpop tmort %10.0f
 gen rate = tmort / tpop * 100000
 
 // /* get average age */
-// use $mdata/int/nchs/appended_rank_mortgranage, clear
+// use $mdata/mort/nchs/appended_rank_mortgranage, clear
 // 
 // keep if inrange(age, 25, 69)
 // 

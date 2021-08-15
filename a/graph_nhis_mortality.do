@@ -14,7 +14,7 @@ updated 2020 with latest data
 /*************************************/
 
 /* open granular age mortality database */
-use $mdata/int/nchs/appended_rank_mortgranage, clear
+use $mdata/mort/nchs/appended_rank_mortgranage, clear
 
 keep edclass sex race year age tmort tpop_rolling tmortrate
 ren edclass ed
