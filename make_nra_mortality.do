@@ -1,10 +1,7 @@
-/* DELETE THIS LINE */
-cd ~/ddl/paper-nra-mortality/
-/* END DELETE */
-
+/* SEE STEPS 1 AND 2 BELOW TO SET UP REPLICATION */
 clear
 
-/* set the following globals:
+/* STEP 1: SET THE FOLLOWING GLOBALS:
 $out: path for output files to be created
 mdata: path to data [intermediate data files will be put here too] */
 global out /scratch/pn/mort-test/out
@@ -16,7 +13,7 @@ if mi("$out") | mi("$tmp") | mi("$mdata") {
   error 1
 }
 
-/* IMPORTANT: set Matlab paths in matlab/set_matlab_paths.m */
+/* STEP 2: SET MATLAB PATHS SIMILARLY IN matlab/set_matlab_paths.m */
 
 
 /* load Stata programs */
@@ -46,6 +43,7 @@ foreach f in bounds nchs nhis matlab_inputs nhis/clean {
 /*********************************************************/
 /* 1. Build mortality file from restricted NCHS data     */
 /*********************************************************/
+// Line commented out since it requires restricted data
 // do $mcode/make_mortality_data
 
 /*********************/
