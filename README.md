@@ -1,10 +1,10 @@
 # paper-nra-mortality
 
-* Calculates analytical and numerical bounds on conditional expectation functions from censored data, from [Novosad, Rafkin & Asher (2020) "Mortality Change Among Less Educated Americans"](http://paulnovosad.com/pdf/nra-mortality.pdf).
+* Calculates analytical and numerical bounds on conditional expectation functions from censored data, from [Novosad, Rafkin & Asher (2021) "Mortality Change Among Less Educated Americans"](http://paulnovosad.com/pdf/nra-mortality.pdf).
 
 * Calculates mortality change in constant education percentile bins. This is non-trivial because education rank boundaries change over time: dropouts were the bottom 20% in 1992 and the bottom 9% in 2018.
 
-* Replication code and data for [Novosad, Rafkin & Asher (2020) "Mortality Change Among Less Educated Americans"](http://paulnovosad.com/pdf/nra-mortality.pdf). (See replication information below)
+* Replication code and data for [Novosad, Rafkin & Asher (2021) "Mortality Change Among Less Educated Americans"](http://paulnovosad.com/pdf/nra-mortality.pdf). (See replication information below)
 
 # Details
 
@@ -51,7 +51,7 @@ Need to specify either `input_csv` or `cuts` and `vals` but not both.
 
 The function returns a pair of floats with the bounds on mortality in the desired bin.
 
-# Replication Code and Data for NRA 2020
+# Replication Code and Data for NRA 2021
 
 To regenerate the tables and figures from the paper, take the
 following steps:
