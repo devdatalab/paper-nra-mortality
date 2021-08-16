@@ -4,7 +4,7 @@
 
 * Calculates mortality change in constant education percentile bins. This is non-trivial because education rank boundaries change over time: dropouts were the bottom 20% in 1992 and the bottom 9% in 2018.
 
-* Provides replication code and data for [Novosad, Rafkin & Asher (2020) "Mortality Change Among Less Educated Americans"](http://paulnovosad.com/pdf/nra-mortality.pdf). (See replication information below)
+* Replication code and data for [Novosad, Rafkin & Asher (2020) "Mortality Change Among Less Educated Americans"](http://paulnovosad.com/pdf/nra-mortality.pdf). (See replication information below)
 
 # Details
 
@@ -56,48 +56,34 @@ The function returns a pair of floats with the bounds on mortality in the desire
 To regenerate the tables and figures from the paper, take the
 following steps:
 
-1. Download and unzip the replication data package from this Google
-   Drive
-   folder (not yet linked--waiting for sharing permission)
-   * To get as many files as possible in .dta form, plus necessary
-   CSVs, use this
-   link (tbd)
-   * To get all the files in CSV format, use this
-     link (tbd)
-   * Regardless of your choice from the two above options, use this
-     link (tbd)
-     to download the raw National Health Interview Survey data
-     (1997-2017), which can be used to re-build the clean NHIS dataset.
-     The clean all-years dataset is also included in the two files above.
+1. Download and unzip the replication data package from this [Google Drive Folder](https://drive.google.com/drive/folders/1m_9YcHOwaNPrvNHa8b0-WPgDEzAOax6b?usp=sharing)
+   * `nra-mortality.zip` -- huge file includes ACS and CPS components
+   * `nra-mortality-small.zip` -- replication mortality datasets, allows complete replication of paper but not some appendices
+   
+2. Clone this repo.
 
-2. Clone this repo and switch to the code folder.
-
-3. Open the do file make_mortality_repl.do, and set the globals `out`,
-   `repdata`, `tmp`, and `mcode`.  
-   * `out` is the target folder for all outputs, such as tables
+3. Open the do file make_nra_mortality.do, and set the globals `out`,
+   `mdata`, and `tmp`.  
+   * `$out` is the target folder for all outputs, such as tables
    and graphs. 
-   * `tmp` is the folder for the data files and
-   temporary data files that will be created during the rebuild.
-   * `repdata` is the folder where you unzipped and saved the
+   * `$mdata` is the folder where you unzipped and saved the
      replication data package.
-   * `mcode` is the code folder of the clone of the replication repo
+   * intermediate files will be placed in both `$tmp` and `$mdata/int`.
 
-4. Run the do file `make_mortality_repl.do`.  This will run through all the
-   other do files to regenerate all of the results.
-   
-We have included all the required programs to generate the main
-   results. However, some of the estimation output commands (like
-   `estout`) may fail if certain Stata packages are missing. These can
-   be replaced by the estimation output commands preferred by the
-   user.
-   
-Please note we use globals for pathnames, which will cause errors if
-   filepaths have spaces in them. Please store code and data in paths
-   that can be access without spaces in filenames.
-   
-The current makefile uses precompiled mortality bounds and changes from
-the data folder, as these results take ~48 hours to generate with Matlab on a
-server with max memory of 429 GB. However, the Matlab programs that generate these files are included in the repo and can be run by uncommenting the Matlab lines in the makefile.
+4. Open `matlab/set_matlab_paths.m` and set `base_path` to the same path as `$mdata`.
 
-This code was tested using Stata 15.0. Run time to generate all
-results on our server was about __ minutes.
+**NOTE:** The code probably won't work if you have spaces in the pathnames. Blame Stata, not us.
+
+5. Run the do file `make_nra_mortality.do`.  This will run through all the
+   other do files to regenerate all of the results in `$out/`.
+   
+## Replication Notes
+
+This paper uses restricted NCHS data, because it requires the education of the deceased, which was not reported in public NCHS files beginning around 2005. These restricted data cannot be included in the replication package. Therefore, the makefile comments out `make_mortality_data.do`, which constructs the NCHS + ACS + CPS national aggregates which form the basis of the analysis. However, `make_mortality_data.do` and its subcomponents are provided for anyone with access to the restricted access data. The outputs of this code appear in `$mdata/mort` (and are provided). We have permission from NCHS to post national mortality aggregates constructed from the microdata.
+
+The Matlab bound-generating code (`run_matlab_solver.do`) was run in parallel across 45 processes on a research server, each process taking about 6 hours. As such, we have configured the code to generate bounds only for one age/race group (age 25, white), which are saved in `$mdata/bounds/int/`. The analysis draws all of its code from `$mdata/bounds/`, which has the complete set of bounds. Note that the Matlab bound-generating code is based on a 100-parameter numerical minimization problem which can have local minima, and thus may produce marginally different results in different versions of Matlab or on servers with different memory or default parameters. As such, the bounds generated in `bounds/int` may differ slightly from those in `bounds/`. We do not expect any substantive differences that would affect any of the conclusions of the paper.
+
+This code was tested using Stata 16.0 and Matlab R2019a. Estimated run times on our server are:
+* NCHS build and pre-Matlab build: 2 hours
+* Matlab bound generation: 6 hours * 45 parallel processes
+* `make_results.do`: 1 hour
