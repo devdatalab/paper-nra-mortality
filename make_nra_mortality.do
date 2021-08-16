@@ -1,5 +1,5 @@
 /* SEE STEPS 1 AND 2 BELOW TO SET UP REPLICATION */
-clear
+clear all
 
 /* STEP 1: SET THE FOLLOWING GLOBALS:
 $out: path for output files to be created
