@@ -1,7 +1,7 @@
 /******************************/
 /* prep income ranks */
 /******************************/
-use $mdata/int/cps_march_inc_8018.dta, clear
+use $mdata/mort/cps_march_inc_8018.dta, clear
 keep if year >= 1992
 
 egen age_gp = cut(age), at(25(5)70)
@@ -44,7 +44,7 @@ syntax, age(string) sex(string) edclass(string) [ name(passthru) title(passthru)
     local wageaxis3 = "45(5)70"
     local wageaxis4 = "70(5)100" 
 
-    use $mdata/int/cps_inc_ranks.dta, clear
+    use $mdata/mort/cps_inc_ranks.dta, clear
     if "`wage'" == "" { 
     keep if female == `sex' - 1 & edclass  == `edclass' & age_gp == `age'
 

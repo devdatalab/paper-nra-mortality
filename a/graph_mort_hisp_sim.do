@@ -1,4 +1,4 @@
-insheet using $mdata/int/bounds/hisp_sim.csv, clear names
+insheet using $mdata/bounds/hisp_sim.csv, clear names
 set scheme pn
 
 destring shift mu* year sex, replace force

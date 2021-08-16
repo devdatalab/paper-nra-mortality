@@ -54,6 +54,7 @@ do $mcode/a/figure_naive_compare.do
 shell python $mcode/a/graph_intuitive.py
 
 /* CEF graphs walking through method */
+FAIL
 do $mcode/a/plot_mort_cef.do
 
 /* table 2 showing mortality stats under different assumptions */

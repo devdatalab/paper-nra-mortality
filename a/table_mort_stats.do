@@ -39,7 +39,7 @@ qui foreach year in 1992 2016 {
 /*****************************/
 /* import the matlab results */
 /*****************************/
-import delimited using $mdata/int/bounds/mort_bounds_sample_table.csv, clear
+import delimited using $mdata/bounds/mort_bounds_sample_table.csv, clear
 
 /* recode vars removing special characters */
 replace f2 = round(f2 * 100)

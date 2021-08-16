@@ -24,6 +24,9 @@ qui do tools.do
 qui do masala-merge/masala_merge
 qui do stata-tex/stata-tex
 
+/* load mortality programs (chiefly bound_mort and helpers) */
+do mortality_programs
+
 /* add ado folder to adopath */
 adopath + ado
 

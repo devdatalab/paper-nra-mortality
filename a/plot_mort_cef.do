@@ -93,7 +93,7 @@ save $tmp/mort_cef_manski, replace
 
 
 foreach v in 12 24 48 100000 {
-  import delimited using $tmp/mort_cef_`v'.csv, clear
+  import delimited using $mdata/int/mort_cef_`v'.csv, clear
   ren v1 p
   ren v2 lb
   ren v3 ub
