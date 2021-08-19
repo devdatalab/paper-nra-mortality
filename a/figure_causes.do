@@ -171,7 +171,7 @@ foreach sex in 1 2 {
         , yline(0, lpattern(-) lcolor(gs8)) legend(off) ///
           name(cause_`sex'_`race'_`ed', replace) subtitle("`label`sex'_ed`ed''", ring(0) pos(12) size(medlarge)) ytitle("") xtitle("Age") $ylabel
       
-      graphout causes-`sex'-`race'-`ed', qui
+      graphout causes-`sex'-`race'-`ed'
     }
     graph combine cause_`sex'_`race'_1 cause_`sex'_`race'_2 cause_`sex'_`race'_3 cause_`sex'_`race'_4, rows(2) xcommon ycommon l1("Percent Change" "1992-94 to 2016-18")
     graphout causes-1992-`sex'-`race', pdf

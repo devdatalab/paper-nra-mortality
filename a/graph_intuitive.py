@@ -28,7 +28,7 @@ mu_0_10  = [747, 800]
 mu_0_8   = [800, 800]
 mu_8_10  = [535, 800]
 mu_8_37  = [535, 535]
-mu_10_37 = [514, 535]
+mu_10_37 = [515, 535]
 mu_30_37 = [318, 535]
 mu_37_40 = [318, 535]
 mu_10_40 = [495, 535]
@@ -252,9 +252,9 @@ ax.add_patch(r)
 ann2 = wrap('mu810 must be between mu08 and mu837 by monotonicity.', 15)
 textbox(ax, 12, 200, ann2, pad = 6, edgecolor='g')
 arrow2(ax, 11, 315, 9, 630, arrowstyle = '->', color='g')
-
 graphout('intuit_a')
 
+## ---------------------------- cell:  ---------------------------- ##
 ####################################
 # PANEL B -- explain the bounds
 f, ax = draw_moments()
@@ -268,7 +268,14 @@ ann1 = wrap(f'mu010 is tightly bounded between {mu_0_10[0]} and {mu_0_10[1]}.', 
 textbox(ax, 11, 1100, ann1, pad = 6, edgecolor='g')
 arrow2(ax, 11,  992, 9, 805, arrowstyle = '->', color='g')
 
+# annotate the lower bound
+ann2 = '$747=800\\cdot\\frac{8}{10}+535\\cdot\\frac{2}{10}$'
+textbox(ax, 21, 800, ann2, pad = 6, edgecolor='g')
+arrow2(ax, 15,  800, 10, 747, arrowstyle = '->', color='g')
+
 graphout('intuit_b')
+
+## ---------------------------- cell:  ---------------------------- ##
 
 ##############################
 # PANEL C --- mu-10-40
@@ -277,7 +284,7 @@ f, ax = draw_moments()
 # draw the <---?---> for mu-10-40
 arrow2(ax, 10, 450, 40, 450)
 textbox(ax, 25, 450, '?')
-plt.plot([0, 0], [310, 520], color='k', linestyle=':')
+plt.plot([40, 40], [310, 520], color='k', linestyle=':')
 plt.plot([10, 10], [310, 520], color='k', linestyle=':')
 
 # annotate mu1040
@@ -301,7 +308,18 @@ ann = wrap('By monotonicity, mu1037 cannot be above mu837 but cannot be so low t
 textbox(ax, 27, 900, ann, pad = 6, edgecolor = 'g')
 arrow2(ax, 27, 785, 30, 550, arrowstyle = '->', color='g')
 
+# annotate the lower bound
+mpl.rc('text', usetex=True) #use latex for text
+mpl.rcParams['text.latex.preamble']=[r"\usepackage{color}"]
+ann2 = '$535=800\\cdot\\frac{10-8}{37-8}+\\textcolor{green}{515} \\cdot\\frac{37-10}{37-8}$'
+textbox(ax, 6, 200, ann2, pad = 6, edgecolor='g')
+arrow2(ax, 9, 220, 9.9, 515, arrowstyle = '->', color='g')
+
 graphout('intuit_c')
+
+## ---------------------------- cell:  ---------------------------- ##
+
+
 
 ################################################
 # PANEL D -- explain the second set of bounds
@@ -315,5 +333,10 @@ ax.add_patch(r)
 ann1 = wrap('mu1040 is tightly bounded between 495 and 535.', 20)
 textbox(ax, 30, 200, ann1, pad = 6)
 arrow2(ax, 30, 300, 30, 481, arrowstyle = '->', color='g')
+
+# annotate the lower bound
+ann2 = '$495=\\frac{515(27)+318(3)}{30}$'
+textbox(ax, 6, 300, ann2, pad = 6, edgecolor='g')
+arrow2(ax, 2.5, 323, 9.9, 495, arrowstyle = '->', color='g')
 
 graphout('intuit_d')

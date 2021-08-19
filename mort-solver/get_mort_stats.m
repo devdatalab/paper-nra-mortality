@@ -17,7 +17,7 @@ function ans = get_mort_stats(output_fn, f2_perc_list, type_list, year_list, sex
   %% END FUNCTION ARGUMENTS
 
   %% add solver path
-  addpath('~/ddl/mortality/mort-solver')
+  addpath('../mort-solver')
 
   %% read mean mortality from mort_means.csv -- for f2 calibrations
 

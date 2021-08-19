@@ -34,7 +34,7 @@ global f $out/mort_paper_stats
 global cumrank "Bin Percentile Boundaries -- Single years -- Combined races"
 global mort    "Mortality At Ed LEVELS -- Single years -- Combined races"
 
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 keep if race == 0
 foreach year in 1992 2018 {
   foreach sex in 1 2 {

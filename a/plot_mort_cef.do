@@ -1,5 +1,5 @@
 /* get rank boundaries in 1992-94 and 2016-18 */
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 list year edclass cum_ed_rank_sex if race == 0 & sex == 2 & age == 50 & inlist(year, 1992, 2018), sepby(year)
 sort year sex race
 list year sex race cum_ed_rank_sex if inlist(year, 1992, 1993, 1994) & age == 50 & edclass == 1, sepby(year)
@@ -18,7 +18,7 @@ keep if race == 0 & sex == 2 & (year >= 2016 | year < 1995) & age == 50
 sort year edc
 
 /* save a collapsed all race dataset for the example group */
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 keep if race == 0 & sex == 2 & year >= 2016 & age == 50
 collapse (mean) tmortrate cum_ed_rank_sex ed_rank_sex, by(edclass)
 
@@ -59,7 +59,7 @@ save $tmp/mort_cef_999, replace
 /***************************/
 
 /* collapse to 2016-2018 as one period */
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 keep if race == 0 & sex == 2 & year >= 2016 & age == 50
 collapse (mean) tmortrate cum_ed_rank_sex ed_rank_sex, by(edclass)
 
@@ -93,7 +93,7 @@ save $tmp/mort_cef_manski, replace
 
 
 foreach v in 12 24 48 100000 {
-  import delimited using $tmp/mort_cef_`v'.csv, clear
+  import delimited using $mdata/int/mort_cef_`v'.csv, clear
   ren v1 p
   ren v2 lb
   ren v3 ub

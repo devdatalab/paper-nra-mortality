@@ -20,7 +20,7 @@ tab edclass if year >= 1992 & ind_BNH == 1 & !inlist(fipsstr,13,40,44,46) & edcl
 /**********************************/
 /* Institutionalized populations  */
 /**********************************/
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 
 gen pop = inst + non_inst
 bys year sex race: egen entire_pop = total(pop)

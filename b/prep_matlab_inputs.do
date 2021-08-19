@@ -1,7 +1,7 @@
 /*******************************************************/
 /* create average mortality by year/cause/sex/race/age */
 /*******************************************************/
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 
 ren age_gp age
 
@@ -40,7 +40,7 @@ export delimited using $mdata/int/matlab_inputs/mort_means_3.csv, replace
 /**************************************************/
 /* create short CSV version of appended_rank_mort */
 /**************************************************/
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 
 ren age_gp age
 keep year edclass age sex cum_ed_*_sex race *mortrate ed_*_sex tpop_rolling tmort
@@ -71,7 +71,7 @@ export delimited using $mdata/int/matlab_inputs/appended_rank_mort_3.csv, replac
 /**********************************/
 /* 3 education bin mortality file */
 /**********************************/
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 
 ren age_gp age
 gen edclass3 = edclass
@@ -99,7 +99,7 @@ exit
 //   /************************************************/
 //   /* create granular data for matlab cohort graph */
 //   /************************************************/
-//   use $mdata/int/nchs/appended_rank_mortgranage, clear
+//   use $mdata/mort/nchs/appended_rank_mortgranage, clear
 //   
 //   gen bc = year - age
 //   
@@ -137,7 +137,7 @@ exit
 //   /*********************************************************/
 //   /* create granular age data in 10-year birth cohort bins */
 //   /*********************************************************/
-//   use $mdata/int/nchs/appended_rank_mortgranage, clear
+//   use $mdata/mort/nchs/appended_rank_mortgranage, clear
 //   
 //   gen bc = year - age
 //   

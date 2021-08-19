@@ -8,7 +8,7 @@ date: January 7
 
 /* figure by ed grouup */ 
 
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 
 /* collapse over education classes */
 collapse (sum) raw_tpop, by(age_gp year sex race) 

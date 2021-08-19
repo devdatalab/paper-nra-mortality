@@ -157,9 +157,9 @@ end
 
 cap pr drop graphout
 pr def graphout
-  syntax anything, [pdf]
+  syntax anything, [pdf QUIetly]
   tokenize `anything'
-  graph export $out/`1'.pdf
+  graph export $out/`1'.pdf, replace
 end
 
 

@@ -8,7 +8,7 @@ global f $out/mort_stats.csv
 /********************************************************/
 /* calculate the stata monotonicity no-curvature bounds */
 /********************************************************/
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 keep if race == 0 & sex == 2 & (year >= 2016 | year < 1995) & age == 50
 replace year = 2016 if year > 2015
 replace year = 1992 if year < 1995
@@ -39,7 +39,7 @@ qui foreach year in 1992 2016 {
 /*****************************/
 /* import the matlab results */
 /*****************************/
-import delimited using $mdata/int/bounds/mort_bounds_sample_table.csv, clear
+import delimited using $mdata/bounds/mort_bounds_sample_table.csv, clear
 
 /* recode vars removing special characters */
 replace f2 = round(f2 * 100)

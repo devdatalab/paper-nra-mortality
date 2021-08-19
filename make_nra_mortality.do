@@ -1,13 +1,9 @@
-/* DELETE THIS LINE */
-cd ~/ddl/paper-nra-mortality/
-/* END DELETE */
+/* SEE STEPS 1 AND 2 BELOW TO SET UP REPLICATION */
+clear all
 
-clear
-
-/* set the following globals:
+/* STEP 1: SET THE FOLLOWING GLOBALS:
 $out: path for output files to be created
 mdata: path to data [intermediate data files will be put here too] */
-
 global out /scratch/pn/mort-test/out
 global tmp /scratch/pn/mort-test/tmp
 global mdata /scratch/pn/mort-test
@@ -17,10 +13,16 @@ if mi("$out") | mi("$tmp") | mi("$mdata") {
   error 1
 }
 
+/* STEP 2: SET MATLAB PATHS SIMILARLY IN matlab/set_matlab_paths.m */
+
+
 /* load Stata programs */
 qui do tools.do
 qui do masala-merge/masala_merge
 qui do stata-tex/stata-tex
+
+/* load mortality programs (chiefly bound_mort and helpers) */
+do mortality_programs
 
 /* add ado folder to adopath */
 adopath + ado
@@ -34,29 +36,24 @@ global mcode = "`c(pwd)'"
 
 /* create new folders */
 cap mkdir $mdata/tmp
-foreach f in bounds nchs matlab_inputs {
+foreach f in bounds nchs nhis matlab_inputs nhis/clean {
   cap mkdir $mdata/int/`f'
 }
 
-/* run different subcomponents of the build */
-
 /*********************************************************/
-/* 1. Build restricted NCHS data including matlab inputs */
+/* 1. Build mortality file from restricted NCHS data     */
 /*********************************************************/
-/* [for CR: is this just prep_mort_rates_all.do?? ] */
-do $mcode/make_nchs_mortality
+// Line commented out since it requires restricted data
+// do $mcode/make_mortality_data
 
-/**************************************/
-/* 2. Build all public ancillary data */
-/**************************************/
-do $mcode/make_ancillary_data
+/*********************/
+/* 2. Prep NHIS data */
+/*********************/
+do $mcode/make_nhis
 
 /***************************************/
 /* 3. Prepare inputs for Matlab solver */
 /***************************************/
-
-/* create mortality moments for NHIS analysis */
-do $mcode/b/mort_moments.do
 
 /* prepare the inputs for the matlab mort-solver */
 do $mcode/b/prep_matlab_inputs.do

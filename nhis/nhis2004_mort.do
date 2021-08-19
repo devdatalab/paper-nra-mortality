@@ -35,7 +35,7 @@ To download and save the public-use LMFs to your hard drive, follow these steps:
 
 
 
-clear all
+clear 
 # delimit cr // SET COMMAND DELIMITER TO ; INSTEAD OF CARRIAGE RETURN
 
 **************

@@ -195,7 +195,7 @@ syntax, [etype(string) dropstates instoff granage supplementalfiles nchs ]
     local appendsuffix = "`etype'`dropstates'`granage'"
 
     if ("`nchs'" == "") local data = "$mdata/int"
-    if ("`nchs'" != "") local data = "$mdata/int/nchs"
+    if ("`nchs'" != "") local data = "$mdata/mort/nchs"
 
     /* for merging: you need the "dropstates" to be on" */ 
     if ("`nchs'" != "") local dropstates = "dropstates"

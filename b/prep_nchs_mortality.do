@@ -5,10 +5,11 @@
 version 13.1
 clear
 cap log close
-cd  "$mdata/raw"
+cd  "$mdata/raw_private"
 
 #delimit ;
 
+/* snake: read MULT1989.AllCnty.txt */
 *1989*;
 	infix
 		year 01-02
@@ -39,7 +40,7 @@ cd  "$mdata/raw"
 		icd 142-145
 		icdn 142-145
 		icd282 146-150
-	using "$mdata/raw/nchs/MULT1989.AllCnty.txt" ;
+	using "$mdata/raw_private/nchs/MULT1989.AllCnty.txt" ;
 		compress;
 replace year=1989;
 	save $mdata/int/nchs/Mort1989.dta, replace;
@@ -75,7 +76,7 @@ clear;
 		icd 142-145
 		icdn 142-145
 		icd282 146-150
-	using "$mdata/raw/nchs/MULT1990.AllCnty.txt" ;
+	using "$mdata/raw_private/nchs/MULT1990.AllCnty.txt" ;
 	compress;
 	replace year=1990;
 
@@ -111,7 +112,7 @@ clear;
 		icd 142-145
 		icdn 142-145
 		icd282 146-150
-	using "$mdata/raw/nchs/MULT1991.AllCnty.txt" ;
+	using "$mdata/raw_private/nchs/MULT1991.AllCnty.txt" ;
 		compress;
 	replace year=1991;
 
@@ -147,7 +148,7 @@ clear;
 		icd 142-145
 		icdn 142-145
 		icd282 146-150
-	using "$mdata/raw/nchs/MULT1992.AllCnty.txt" ;
+	using "$mdata/raw_private/nchs/MULT1992.AllCnty.txt" ;
 		compress;
 	replace year=1992;
 
@@ -182,7 +183,7 @@ clear;
 		icd 142-145
 		icdn 142-145
 		icd282 146-150
-	using "$mdata/raw/nchs/MULT1993.AllCnty.txt" ;
+	using "$mdata/raw_private/nchs/MULT1993.AllCnty.txt" ;
 	compress;
 		replace year=1993;
 
@@ -217,7 +218,7 @@ clear;
 		icd 142-145
 		icdn 142-145
 		icd282 146-150
-	using "$mdata/raw/nchs/MULT1994.AllCnty.txt" ;
+	using "$mdata/raw_private/nchs/MULT1994.AllCnty.txt" ;
 	compress;
 		replace year=1994;
 
@@ -252,7 +253,7 @@ clear;
 		icd 142-145
 		icdn 142-145
 		icd282 146-150
-	using "$mdata/raw/nchs/MULT1995.AllCnty.txt" ;
+	using "$mdata/raw_private/nchs/MULT1995.AllCnty.txt" ;
 		replace year=1995;
 
 	compress;
@@ -286,7 +287,7 @@ clear;
 		icd 142-145
 		icdn 142-145
 		icd282 146-150
-	using "$mdata/raw/nchs/MULT1996.AllCnty.txt" ;
+	using "$mdata/raw_private/nchs/MULT1996.AllCnty.txt" ;
 	gen year=1996;
 	compress;
 	save $mdata/int/nchs/Mort1996.dta, replace;
@@ -320,7 +321,7 @@ clear;
 		icd 142-145
 		icdn 142-145
 		icd282 146-150
-	using "$mdata/raw/nchs/MULT1997.AllCnty.txt" ;
+	using "$mdata/raw_private/nchs/MULT1997.AllCnty.txt" ;
 	gen year=1997;
 	compress;
 	save $mdata/int/nchs/Mort1997.dta, replace;
@@ -355,7 +356,7 @@ clear;
 		icd 142-145
 		icdn 142-145
 		icd282 146-150
-	using "$mdata/raw/nchs/MULT1998.AllCnty.txt" ;
+	using "$mdata/raw_private/nchs/MULT1998.AllCnty.txt" ;
 	gen year=1998;
 	compress;
 	save $mdata/int/nchs/Mort1998.dta, replace;
@@ -389,7 +390,7 @@ clear;
 			fipssmsar 129-132 str
 			icd10 142-145 str
 			icd358 146-148
-          	using "$mdata/raw/nchs/MULT1999.AllCnty.txt" ;
+          	using "$mdata/raw_private/nchs/MULT1999.AllCnty.txt" ;
 		gen year=1999;
 		compress;
 		save $mdata/int/nchs/Mort1999.dta, replace;
@@ -420,7 +421,7 @@ clear;
 			fipssmsar 129-132 str
 			icd10 142-145 str
 			icd358 146-148
-                using "$mdata/raw/nchs/MULT2000.USAllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2000.USAllCnty.txt" ;
 		gen year=2000;
 		compress;
 		save $mdata/int/nchs/Mort2000.dta, replace;
@@ -452,7 +453,7 @@ clear;
 			icd10 142-145 str
 			icd358 146-148
 
-                using "$mdata/raw/nchs/MULT2001.AllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2001.AllCnty.txt" ;
 		gen year=2001;
 		compress;
 		save $mdata/int/nchs/Mort2001.dta, replace;
@@ -483,7 +484,7 @@ clear;
 			fipssmsar 129-132 str
 			icd10 142-145 str
 			icd358 146-148
-                using "$mdata/raw/nchs/MULT2002.USAllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2002.USAllCnty.txt" ;
 		gen year=2002;
 		compress;
 		save $mdata/int/nchs/Mort2002.dta, replace;
@@ -516,7 +517,7 @@ clear;
 			racerec3 449
 			hispanic2003 484-486
 			hisprec 488
-                using "$mdata/raw/nchs/MULT2003.USAllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2003.USAllCnty.txt" ;
 		gen year=2003;
 		compress;
 		save $mdata/int/nchs/Mort2003.dta, replace;
@@ -548,7 +549,7 @@ clear;
 			racerec3 449
 			hispanic2003 484-486
 			hisprec 488
-                using "$mdata/raw/nchs/MULT2004.USAllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2004.USAllCnty.txt" ;
 		gen year=2004;
 		compress;
 		save $mdata/int/nchs/Mort2004.dta, replace;
@@ -580,7 +581,7 @@ clear;
 			racerec3 449
 			hispanic2003 484-486
 			hisprec 488
-                using "$mdata/raw/nchs/MULT2005.USAllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2005.USAllCnty.txt" ;
 		gen year=2005;
 		compress;
 		save $mdata/int/nchs/Mort2005.dta, replace;
@@ -612,7 +613,7 @@ clear;
 			racerec3 449
 			hispanic2003 484-486
 			hisprec 488
-                using "$mdata/raw/nchs/MULT2006.USAllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2006.USAllCnty.txt" ;
 		gen year=2006;
 		compress;
 		save $mdata/int/nchs/Mort2006.dta, replace;
@@ -644,7 +645,7 @@ clear;
 			racerec3 449
 			hispanic2003 484-486
 			hisprec 488
-                using "$mdata/raw/nchs/MULT2007.USAllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2007.USAllCnty.txt" ;
 		gen year=2007;
 		compress;
 		save $mdata/int/nchs/Mort2007.dta, replace;
@@ -676,7 +677,7 @@ clear;
 			racerec3 449
 			hispanic2003 484-486
 			hisprec 488
-                using "$mdata/raw/nchs/MULT2008.USAllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2008.USAllCnty.txt" ;
 		gen year=2008;
 		compress;
 		save $mdata/int/nchs/Mort2008.dta, replace;
@@ -708,7 +709,7 @@ clear;
 			racerec3 449
 			hispanic2003 484-486
 			hisprec 488
-                using "$mdata/raw/nchs/MULT2009.USAllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2009.USAllCnty.txt" ;
 		gen year=2009;
 		compress;
 		save $mdata/int/nchs/Mort2009.dta, replace;
@@ -740,7 +741,7 @@ clear;
 			racerec3 449
 			hispanic2003 484-486
 			hisprec 488
-                using "$mdata/raw/nchs/MULT2010.USAllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2010.USAllCnty.txt" ;
 		gen year=2010;
 		compress;
 		save $mdata/int/nchs/Mort2010.dta, replace;
@@ -772,7 +773,7 @@ clear;
 			racerec3 449
 			hispanic2003 484-486
 			hisprec 488
-                using "$mdata/raw/nchs/MULT2011.USAllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2011.USAllCnty.txt" ;
 		gen year=2011;
 		compress;
 		save $mdata/int/nchs/Mort2011.dta, replace;
@@ -807,7 +808,7 @@ clear;
 			racerec3 449
 			hispanic2003 484-486
 			hisprec 488
-                using "$mdata/raw/nchs/MULT2012.USAllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2012.USAllCnty.txt" ;
 		gen year=2012;
 		compress;
 		save $mdata/int/nchs/Mort2012.dta, replace;
@@ -842,7 +843,7 @@ clear;
 			racerec3 449
 			hispanic2003 484-486
 			hisprec 488
-                using "$mdata/raw/nchs/MULT2013.USAllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2013.USAllCnty.txt" ;
 		gen year=2013;
 		compress;
 		save $mdata/int/nchs/Mort2013.dta, replace;
@@ -874,7 +875,7 @@ clear;
 			racerec3 449
 			hispanic2003 484-486
 			hisprec 488
-                using "$mdata/raw/nchs/MULT2014.USAllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2014.USAllCnty.txt" ;
 		gen year=2014;
 		compress;
 		save $mdata/int/nchs/Mort2014.dta, replace;
@@ -911,7 +912,7 @@ clear;
 			racerec3 449
 			hispanic2003 484-486
 			hisprec 488
-                using "$mdata/raw/nchs/MULT2015.USAllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2015.USAllCnty.txt" ;
 		gen year=2015;
 		compress;
 
@@ -946,7 +947,7 @@ clear;
     racerec3 449
     hispanic2003 484-486
     hisprec 488
-                using "$mdata/raw/nchs/MULT2016.USAllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2016.USAllCnty.txt" ;
 		gen year=2016;
 		compress;
 
@@ -980,7 +981,7 @@ clear;
     racerec3 449
     hispanic2003 484-486
     hisprec 488
-                using "$mdata/raw/nchs/MULT2017.USAllCnty.txt" ;
+                using "$mdata/raw_private/nchs/MULT2017.USAllCnty.txt" ;
 		gen year=2017;
 		compress;
 
@@ -1014,7 +1015,7 @@ clear;
     racerec3 449
     hispanic2003 484-486
     hisprec 488
-                using "$mdata/raw/nchs/Mort2018US.AllCnty.txt" ;
+                using "$mdata/raw_private/nchs/Mort2018US.AllCnty.txt" ;
 		gen year=2018;
 		compress;
 
@@ -1190,5 +1191,6 @@ replace edclass_detailed = 99 if edclass_detailed == .;
 ren edclass edclass_3bin ;
 ren edclass_detailed edclass ;
 
+/* snake: write mort_8918 */
 save $mdata/int/nchs/mort_8918, replace;
 

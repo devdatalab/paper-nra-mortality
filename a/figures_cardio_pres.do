@@ -158,7 +158,7 @@ local racet3 hisp
 local racet4 other
 local racet0 all
 
-use $mdata/int/nchs/appended_rank_mort, clear
+use $mdata/mort/nchs/appended_rank_mort, clear
 
 /* smooth the mortrate series */
 egen g = group(age sex race edclass)

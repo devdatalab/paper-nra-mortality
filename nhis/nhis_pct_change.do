@@ -47,7 +47,7 @@ foreach type in ed ed_3 {
 
 /* recreate standardized mortality file, so we have control over the age in sample */
 foreach type in "" "_3bin" { 
-  use $mdataint/nchs/appended_rank_mort`type', clear
+  use $mdata/mort/nchs/appended_rank_mort`type', clear
         drop _merge
         ren age_gp age
         merge m:1 age using $std/std-pop-79-5

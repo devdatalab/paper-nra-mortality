@@ -66,10 +66,10 @@ for f = 1:length(f2_list)
   fprintf('\n')
   
   %% get the bin midpoints from the cuts
-  mid(1) = cuts(1) / 2
-  mid(2) = (cuts(2) - cuts(1)) / 2 + cuts(1)
-  mid(3) = (cuts(3) - cuts(2)) / 2 + cuts(2)
-  mid(4) = (cuts(4) - cuts(3)) / 2 + cuts(3)
+  mid(1) = cuts(1) / 2;
+  mid(2) = (cuts(2) - cuts(1)) / 2 + cuts(1);
+  mid(3) = (cuts(3) - cuts(2)) / 2 + cuts(2);
+  mid(4) = (cuts(4) - cuts(3)) / 2 + cuts(3);
   
   %% smooth mus
   mu_lb_smooth = mu_lb;
@@ -78,7 +78,7 @@ for f = 1:length(f2_list)
   mu_ub_smooth(2:98) = (mu_ub(1:97) + mu_ub(2:98) + mu_ub(3:99)) / 3;
 
   %% store smooth mus
-  csv_fn = sprintf(tmp_path + "/mort_cef_%s.csv", f2_name);
+  csv_fn = sprintf(output_path + "/mort_cef_%s.csv", f2_name);
   csvwrite(csv_fn,[[1:99]' mu_lb' mu_ub'])
   
   clf
