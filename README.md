@@ -56,7 +56,7 @@ The function returns a pair of floats with the bounds on mortality in the desire
 To regenerate the tables and figures from the paper, take the
 following steps:
 
-1. Download and unzip the replication data package from this [Google Drive Folder](https://drive.google.com/drive/folders/1m_9YcHOwaNPrvNHa8b0-WPgDEzAOax6b?usp=sharing)
+1. Download and unzip the replication data package from this [Google Drive Folder](https://drive.google.com/drive/folders/1DnOP2XfCMVygZ--OrRyY5_HkCoo3E6Mc?usp=sharing)
    * `nra-mortality.zip` -- huge file includes ACS and CPS components
    * `nra-mortality-small.zip` -- replication mortality datasets, allows complete replication of paper but not some appendices
    
@@ -72,9 +72,11 @@ following steps:
 
 4. Open `matlab/set_matlab_paths.m` and set `base_path` to the same path as `$mdata`.
 
+5. Open `a/graph_intuitive.py` and set `output_path` to `$mdata/out` in line 10.
+
 **NOTE:** The code probably won't work if you have spaces in the pathnames. Blame Stata, not us.
 
-5. Run the do file `make_nra_mortality.do`.  This will run through all the
+6. Run the do file `make_nra_mortality.do`.  This will run through all the
    other do files to regenerate all of the results in `$out/`.
    
 ## Replication Notes
