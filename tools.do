@@ -441,3 +441,114 @@ end
   /* *********** END program tag ***************************************** */
 
 
+  /****************************************************************************************/
+  /* program stc: short version of store_tex_constant   */
+  /****************************************************************************************/
+  cap prog drop stc
+  prog def stc
+    syntax, file(passthru) idshort(passthru) idlong(passthru) value(passthru) desc(passthru)
+    store_tex_constant, `file' `idshort' `idlong' `value' `desc'
+  end
+  /** END program stc *******************************************************/
+      
+  /****************************************************************************************/
+  /* program store_tex_constant: Store a value in a table for importing into a tex file   */
+  /****************************************************************************************/
+  cap prog drop store_tex_constant
+  prog def store_tex_constant
+  {
+    syntax, file(string) idshort(string) idlong(string) value(real) desc(string) 
+  
+    /* create a string for use in insert_into_file() with both ids and the description */
+    local key `idlong'
+    local value `idshort',`value',`desc'
+
+    /* create the CSV and TEX files-- assume the same stub within a project */
+    local csvfile `file'.csv
+    local texfile `file'.tex
+  
+    /* break if description includes commas */
+    if strpos("`desc'", ",") {
+      display as error "store_tex_constant error: Description cannot include commas."
+      error 765
+    }
+    
+    /* IF CSV FILE EXISTS, CHECK IF LONG OR SHORT ID IS ALREADY THERE AND CONTRADICTORY */
+    cap confirm file `csvfile'
+    if !_rc {
+  
+    /* Use grep to pull just the line with this string in it from the CSV */
+      tempfile foo
+      shell grep ^`idlong', `csvfile' >`foo'
+      shell grep ,`idshort', `csvfile' >>`foo'
+      cat `foo'
+      
+      /* read the one-line input file (and do nothing if the file is empty) */
+      cap file close fh
+      file open fh using `foo', read
+      file read fh line
+      while r(eof) == 0 {
+    
+        /* pull the first delimiter from the line */
+        local file_idlong = substr("`line'", 1, strpos("`line'", ",") - 1)
+//        di "file_idlong: `file_idlong'"
+        
+        /* pull the second delimiter from the line */
+        local rest_of_line = substr("`line'", strpos("`line'", ",") + 1, .)
+//        di "rest_of_line: `rest_of_line'"
+        local file_idshort = substr("`rest_of_line'", 1, strpos("`rest_of_line'", ",") - 1)
+//        di "file_idshort: `file_idshort'"
+    
+        /* assert that the idshorts match and we aren't creating a conflict */
+        cap assert "`file_idshort'" == "`idshort'" & "`file_idlong'" == "`idlong'"
+        if _rc {
+          display as error "store_tex_constant error: `idshort',`idlong' was requested, but `file_idshort',`file_idlong' already exists in file"
+          file close fh
+          error 765
+        }
+    
+        /* if this doesn't result in eof, the grep got multiple lines-- which is bad */
+        file read fh line
+      }
+      file close fh
+    }
+    
+    /* insert the string into the CSV */
+    insert_into_file using `csvfile', key(`key') value(`"`value'"') 
+
+    /* REGENERATE THE LATEX INPUT FILE */
+  
+    /* open the CSV input file and the TEX output file */
+    /* note: it would be easier to import the CSV in stata, but expensive to preserve each time we call this */
+    confirm file `csvfile'
+    cap file close fout
+    cap file close fintex
+    file open fout using `texfile', write replace
+    file open fintex using `csvfile', read
+  
+    /* loop over all lines in the CSV */
+    file read fintex line
+    while r(eof) == 0 {
+  
+      /* all the latex file needs are the short id and the number-- fields 2 and 3 */
+      local comma1 = strpos("`line'", ",")
+      local rest   = substr("`line'", `comma1' + 1, .)
+  
+      local comma2 = strpos("`rest'", ",")
+      local shortid = substr("`rest'", 1, `comma2' - 1)
+      local rest   = substr("`rest'", `comma2' + 1, .)
+  
+      local comma3 = strpos("`rest'", ",")
+      local value  = substr("`rest'", 1, `comma3' - 1)
+      
+      /* write the latex line */
+      file write fout "\newcommand{\\`shortid'}{`value'}" _n
+  
+      /* read the next line from the file */
+      file read fintex line
+    }  
+    file close fout
+    file close fintex
+  }
+  end
+  /** END program store_tex_constant ******************************************************/
