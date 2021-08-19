@@ -56,7 +56,7 @@ The function returns a pair of floats with the bounds on mortality in the desire
 To regenerate the tables and figures from the paper, take the
 following steps:
 
-1. Download and unzip the replication data package from this [Google Drive Folder](https://drive.google.com/drive/folders/1m_9YcHOwaNPrvNHa8b0-WPgDEzAOax6b?usp=sharing)
+1. Download and unzip the replication data package from this [Google Drive Folder](https://drive.google.com/drive/folders/1DnOP2XfCMVygZ--OrRyY5_HkCoo3E6Mc?usp=sharing)
    * `nra-mortality.zip` -- huge file includes ACS and CPS components
    * `nra-mortality-small.zip` -- replication mortality datasets, allows complete replication of paper but not some appendices
    
