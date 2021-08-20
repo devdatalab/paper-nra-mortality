@@ -85,6 +85,8 @@ This paper uses restricted NCHS data, because it requires the education of the d
 
 The Matlab bound-generating code (`run_matlab_solver.do`) was run in parallel across 45 processes on a research server, each process taking about 6 hours. As such, we have configured the code to generate bounds only for one age/race group (age 25, white), which are saved in `$mdata/bounds/int/`. The analysis draws all of its code from `$mdata/bounds/`, which has the complete set of bounds. Note that the Matlab bound-generating code is based on a 100-parameter numerical minimization problem which can have local minima, and thus may produce marginally different results in different versions of Matlab or on servers with different memory or default parameters. As such, the bounds generated in `bounds/int` may differ slightly from those in `bounds/`. We do not expect any substantive differences that would affect any of the conclusions of the paper.
 
+You might need to change `\mortalitypath` in `mortality.tex` to an absolute path. The relative path to `exhibits/` works for some of us and not for others.
+
 This code was tested using Stata 16.0 and Matlab R2019a. Estimated run times on our server are:
 * NCHS build and pre-Matlab build: 2 hours
 * Matlab bound generation: 6 hours * 45 parallel processes
