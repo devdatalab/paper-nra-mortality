@@ -243,7 +243,7 @@ local s: di "[`lb' ... `ub']"
 store_constant using $f, value("`s'") desc("non-despair -- normalized to total -- white women ed1 Age 25") category("Selected Mortality Change Bounds 1992-94 to 2016-18") format(string)
 
 
-shell python $mcode/a/write_paper_stats.py
+// shell python $mcode/a/write_paper_stats.py
 
 
 exit

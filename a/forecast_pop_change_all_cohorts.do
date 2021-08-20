@@ -257,7 +257,7 @@ twoway ///
 graphout bias
 
 /* create the paper stats web site  */
-shell python $mcode/a/write_paper_stats.py
+// shell python $mcode/a/write_paper_stats.py
 
 // example. mortality rises from 1000/100k to 1800/100k (80% gain). But cohort shrunk by 23.6%. True cohort size was 123600. So mortality at time 2 was 1456.
 

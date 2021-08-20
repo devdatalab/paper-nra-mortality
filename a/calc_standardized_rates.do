@@ -325,4 +325,4 @@ table_from_tpl, o($out/all_cause_std.tex) r($f) t($mcode/a/tpl/all_cause_std.tpl
 table_from_tpl, o($out/age_adjusted_all_cause.tex) r($f) t($mcode/a/tpl/age_adjusted_all_cause.tpl)
 
 /* write paper stats */
-shell python $mcode/a/write_paper_stats.py
+// shell python $mcode/a/write_paper_stats.py
