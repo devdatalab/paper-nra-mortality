@@ -112,7 +112,6 @@ foreach bc in 1950 1960 {
     global bc_end = `bc' + 4
     global start_year 1992
     
-    set scheme pn
     use $mdata/mort/nchs/appended_rank_mortgranage, clear
 
     /* only keep up to 2015 since GED data doesn't go past it */
