@@ -143,7 +143,7 @@ capture pr define mortality_ed_fig
       scatter `cause'mortrate ed_rank_sex if year == 2017,  msize(medium) mcolor("255 180 0") msymbol(+) || ///
       scatter `cause'mortrate ed_rank_sex if year == 2018,  msize(vlarge) mcolor("255 240 0") mlcolor(black) msymbol(s) ///
       xtitle("Mean Education Percentile", size(medlarge)) ytitle("Deaths per 100,000", size(medlarge)) subtitle("`subtitle'", size(large) ring(0) position(12)) ///
-      xlabel(0(25)100, labsize(large)) scheme(pn) `ylabel' `ytick' `title' ///
+      xlabel(0(25)100, labsize(large))  `ylabel' `ytick' `title' ///
       name(`name', replace) graphregion(color(white)) ylabel(,labsize(large)) `legend' ///
       `textboxes' ///
       xtitle(,size(large)) ytitle(,size(large)) title(,size(vlarge))
