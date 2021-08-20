@@ -6,7 +6,8 @@
 \newcommand{\HOME}{\string~}
 
 %% Path setup for publication / replication repo ONLY
-\newcommand{\mortalitypath}{exhibits}
+%\newcommand{\mortalitypath}{exhibits}
+\newcommand{\mortalitypath}{\string~/ddl/paper-nra-mortality/tex/exhibits}
 \input{front_matter_natbib}
 
 \newtheorem{proposition}{Proposition}
@@ -51,7 +52,7 @@
 % TITLE PAGE
 %%%%%%%%%%%%%%%%%%%%%% 
 \begin{document}
-\date{December 2020}
+\date{August 2020}
 
 \maketitle\thispagestyle{empty}
 
@@ -208,7 +209,7 @@ Statistics System of the National Center for Health Statistics
 \citep{NCHS2018}. Mortality rates (deaths per 100,000 people) were
 obtained by dividing the number of deaths in each age, race, gender
 and education cell by the population total from the Current
-Population Survey (CPS). We code ages in 5-year bins to mitigate
+Population Survey \citep{cps}. We code ages in 5-year bins to mitigate
 bias from changing age within bins over time
 \citep{Gelman2016,Case2017}. Education could be consistently matched
 across datasets in four groups: (i) less than a high school degree,
@@ -230,7 +231,7 @@ alcoholic liver diseases and cirrhosis \citep{Kochanek2016,Case2017};
 we exclude suicides from injuries. More detail on the distribution of
 deaths is reported in Table~\ref{tab:icd_causes}. 
 
-The strength of the NCHS data is its large number of observations and precision. The weakness is that mortality rates can only be measured in NCHS by dividing deaths by the population in a different dataset, creating risk of bias if the datasets have different biases in covariate measurement. We address many of these potential biases in the robustness section of the paper, but it cannot be ruled out entirely. The best alternative measures of U.S. mortality come from the NHIS, which matches individuals to mortality records, eliminating division bias. The weakness of the NHIS is that it has too small a sample to measure mortality change among less educated groups with much precision, as we show in Appendix~\ref{sec:app_nhis}.
+The strength of the NCHS data is its large number of observations and precision. The weakness is that mortality rates can only be measured in NCHS by dividing deaths by the population in a different dataset, creating risk of bias if the datasets have different biases in covariate measurement. We address many of these potential biases in the robustness section of the paper, but it cannot be ruled out entirely. The best alternative measures of U.S. mortality come from the National Health Interview Survey (NHIS), which matches individuals to mortality records, eliminating division bias. The weakness of the NHIS is that it has too small a sample to measure mortality change among less educated groups with much precision, as we show in Appendix~\ref{sec:app_nhis}.
 
 \section{Methods: Bounding Mortality in Constant Education
   Percentile Bins}
@@ -583,7 +584,7 @@ We address division bias in three ways. First, in Appendix~\ref{sec:app_hisp}, w
 
 Second, in Appendix~\ref{sec:app_cps_cohorts}, we bound the error that could arise from false reporting of education or ethnicity in the CPS by examining the size of synthetic CPS dropout cohorts over time. If CPS respondents increasingly overreport their education, or if white respondents are increasingly reporting themselves as Hispanic, then the synthetic cohort of non-Hispanic white dropouts will shrink in size more than can be explained by the death rate and the rate of continuing adult education. We show that under the worst-case assumptions for our hypothesis, misreporting of education in the CPS could potentially account for less than 8\% of the mortality change of the least educated white women in the 1950--54 birth cohort and less than 24\% in the 1960--64 birth cohort. The worst case bias for white men and at higher education groups is even smaller. As we discuss in Appendix~\ref{sec:app_cps_cohorts}, this worst-case bias scenario is very unlikely to be true; it is therefore implausible that erroneous population counts in the CPS are driving our findings.
 
-Third, in Appendix~\ref{sec:app_nhis}, we calculate mortality rates and other health measures using the National Health Interview Survey (NHIS). The NHIS makes it possible to measure mortality in a sample of individuals without any division bias, because survey respondents are followed up for many years and any deaths are recorded. The NHIS broadly supports the notion of divergent outcomes between high-school dropouts and high-school completers \citep{Hendi2015,Sasson2016,Hendi2017,Sasson2017}, but the very small samples of dropouts lead to very imprecise estimates.\footnote{\citet{Hendi2015} finds that mortality is not rising for the male dropouts in the NHIS. Our NHIS analysis is consistent with \citet{Sasson2017}, who argues that the NHIS sample of white male dropouts is too small to distinguish between zero mortality change and our reported effects of 1.6--2.2\% growth per year in the bottom 10\%.}
+Third, in Appendix~\ref{sec:app_nhis}, we calculate mortality rates and other health measures using the NHIS \citep{nhis}. The NHIS makes it possible to measure mortality in a sample of individuals without any division bias, because survey respondents are followed up for many years and any deaths are recorded. The NHIS broadly supports the notion of divergent outcomes between high-school dropouts and high-school completers \citep{Hendi2015,Sasson2016,Hendi2017,Sasson2017}, but the very small samples of dropouts lead to very imprecise estimates.\footnote{\citet{Hendi2015} finds that mortality is not rising for the male dropouts in the NHIS. Our NHIS analysis is consistent with \citet{Sasson2017}, who argues that the NHIS sample of white male dropouts is too small to distinguish between zero mortality change and our reported effects of 1.6--2.2\% growth per year in the bottom 10\%.}
 
 In Appendix~\ref{sec:app_nhis}, we also examine self-reported health status in the NHIS, which is measured more precisely than mortality. We find that self-reported health status declines more for white female dropouts than for white women with all higher levels of education, with the difference concentrated among 40--60 year olds---the same age group that had the highest differential mortality change between dropouts and high school completers in our main analysis (Figure~\ref{fig:mort_main}). Among men, health changes are similar between dropouts and high school graduates for young men, but among older men, dropouts experience substantially more health deterioration than high school completers, again consistent with the results in Figure~\ref{fig:mort_main}. Changes in self-reported health status are thus consistent with our finding that mortality changes among whites are driven by those in the least educated 10\%.
 
@@ -634,7 +635,8 @@ To better understand the causes of these mortality increases, researchers have s
 \newpage
 \singlespace
 \bibliographystyle{aer}
-\bibliography{master}
+%\bibliography{master}
+\bibliography{\string~/ddl/paper-nra-mortality/tex/master,\string~/ddl/paper-nra-mortality/tex/datasets}
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %% TABLES AND FIGURES %%
