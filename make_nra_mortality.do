@@ -1,6 +1,11 @@
 /* SEE STEPS 1 AND 2 BELOW TO SET UP REPLICATION */
 clear all
 
+/* ssc install things we need */
+foreach v in savesome listtex xfill unique {
+  ssc install `v'
+}
+
 /* STEP 1: SET THE FOLLOWING GLOBALS:
 $out: path for output files to be created
 mdata: path to data [intermediate data files will be put here too] */
