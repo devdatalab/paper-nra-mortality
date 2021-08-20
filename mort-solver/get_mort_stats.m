@@ -16,6 +16,9 @@ function ans = get_mort_stats(output_fn, f2_perc_list, type_list, year_list, sex
   %% output_fn = '/scratch/pn/mus/mort_causes_fixed.csv';
   %% END FUNCTION ARGUMENTS
 
+  %% Get global paths
+  set_matlab_paths
+
   %% add solver path
   addpath('../mort-solver')
 
@@ -27,14 +30,14 @@ function ans = get_mort_stats(output_fn, f2_perc_list, type_list, year_list, sex
   %% 3-bin function call.
   if nargin == 13
     if strcmp(src_data, 'ybin')
-      data = readtable('~/iec/mortality/int/matlab_inputs/appended_rank_mort_3.csv');
-      table_mort_means = readtable('~/iec/mortality/int/matlab_inputs/mort_means_3.csv');
+      data = readtable(output_path + '/matlab_inputs/appended_rank_mort_3.csv');
+      table_mort_means = readtable(output_path + '/matlab_inputs/mort_means_3.csv');
     elseif strcmp(src_data, 'ybin_ed3')
-      data = readtable('~/iec/mortality/int/matlab_inputs/appended_rank_mort_ed3.csv');
-      table_mort_means = readtable('~/iec/mortality/int/matlab_inputs/mort_means_3.csv');
+      data = readtable(output_path + '/matlab_inputs/appended_rank_mort_ed3.csv');
+      table_mort_means = readtable(output_path + '/matlab_inputs/mort_means_3.csv');
     else    %% implies strcmp(src_data, 'main')
-      data = readtable('~/iec/mortality/int/matlab_inputs/appended_rank_mort.csv');
-      table_mort_means = readtable('~/iec/mortality/int/matlab_inputs/mort_means.csv');
+      data = readtable(output_path + '/matlab_inputs/appended_rank_mort.csv');
+      table_mort_means = readtable(output_path + '/matlab_inputs/mort_means.csv');
     end
   end
 
