@@ -1,0 +1,106 @@
+* 00000004
+*! version 1.0.0
+* Do not erase or edit this file
+* It is used by Stata to track the ado and help
+* files you have installed.
+
+S http://fmwww.bc.edu/repec/bocode/s
+N savesome.pkg
+D 19 Oct 2021
+U 1
+d 'SAVESOME': module to save subset of data
+d 
+d savesome saves part of the data in memory to filename.
+d 
+d KW: save
+d KW: data management
+d KW: files
+d 
+d Requires: Stata version 7.0
+d 
+d 
+d Author: Nicholas J. Cox, Durham University
+d Support: email N.J.Cox@@durham.ac.uk
+d 
+d Distribution-Date: 20150228
+d 
+f s/savesome.ado
+f s/savesome.sthlp
+e
+S https://www.sealedenvelope.com
+N xfill.pkg
+D 19 Oct 2021
+U 2
+d Fill in static variables in longitudinal data.
+d xfill 'fills in' missing values of static variables in
+d longitudinal datasets. A static variable is one that is constant
+d in multiple record data, such as patient gender in a series of
+d follow-up visits on the same patient.
+d 
+d Author: Tony Brady, Sealed Envelope Ltd.
+d Distribution-Date: 25oct2012
+f x/xfill.ado
+f x/xfill.hlp
+e
+S http://fmwww.bc.edu/repec/bocode/l
+N listtex.pkg
+D 19 Oct 2021
+U 3
+d 'LISTTEX': module to list variables as rows of a TeX, HTML or word processor table
+d 
+d listtex outputs a list of variables to the Stata log or to
+d a file as TeX,      HTML or word processor table rows, which can
+d then be inserted into a TeX,     HTML or word processor table by
+d cutting and pasting and/or file linking      and/or embedding (eg
+d using the TeX \input command). listtex produces the    table
+d rows, but may also produce a set of header lines before the table
+d      rows and/or footer lines after the table rows, containing
+d preambles and/or table definitions and/or table headers
+d and/or table footers, as specified   by the user.
+d 
+d KW: output
+d KW: TeX
+d KW: LaTeX
+d 
+d Requires: Stata version 10.0
+d 
+d 
+d Author: Roger Newson, National Heart and Lung Institute, Imperial College London
+d Support: email  r.newson@@imperial.ac.uk
+d 
+d Distribution-Date: 20091027
+f l/listtex.ado
+f l/listtex.sthlp
+f l/listtex_vars.ado
+f l/listtex_vars.sthlp
+f l/listtex_rstyle.ado
+f l/listtex_rstyle.sthlp
+e
+S http://fmwww.bc.edu/repec/bocode/u
+N unique.pkg
+D 19 Oct 2021
+U 4
+d 'UNIQUE': module to report number of unique values in variable(s)
+d 
+d  The command unique without a by reports the number of unique
+d values for the varlist. With a by it does the same, but also
+d creates a new variable (_Unique by default but can be named in
+d the gen option). This new variable contains the number of unique
+d values of the varlist for each level of the by variable. The new
+d variable is coded missing except for the first record in each
+d group defined by the levels of the by variable. The command is
+d useful for exploring data where the records refer to more than
+d one level, for example longitudinal data where each record refers
+d to a visit by a subject.
+d 
+d 
+d Requires: Stata version 10.1
+d 
+d Distribution-Date: 20200618
+d 
+d Author: Tony Brady
+d Support: email tony@@sealedenvelope.com
+d 
+f u/unique.ado
+f u/unique.sthlp
+e
