@@ -15,6 +15,9 @@ if mi("$out") | mi("$tmp") | mi("$mdata") {
 }
 
 /* STEP 2: SET MATLAB PATHS SIMILARLY IN matlab/set_matlab_paths.m */
+file open myfile using "matlab/set_basepath.m", write replace
+file write myfile "base_path = '$mdata'"
+file close myfile
 
 /* load Stata programs */
 qui do tools.do
