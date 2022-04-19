@@ -74,7 +74,7 @@ following steps:
 
 5. Open `a/graph_intuitive.py` and set `output_path` to `$mdata/out` in line 10.
 
-**NOTE:** The code probably won't work if you have spaces in the pathnames. Blame Stata, not us.
+**NOTE:** The code probably won't work if you have spaces in the pathnames. Blame StataCorp, not us.
 
 6. Run the do file `make_nra_mortality.do`.  This will run through all the
    other do files to regenerate all of the results in `$out/`.
@@ -82,6 +82,8 @@ following steps:
 ## Replication Notes
 
 This paper uses restricted NCHS data, because it requires the education of the deceased, which was not reported in public NCHS files beginning around 2005. These restricted data cannot be included in the replication package. Therefore, the makefile comments out `make_mortality_data.do`, which constructs the NCHS + ACS + CPS national aggregates which form the basis of the analysis. However, `make_mortality_data.do` and its subcomponents are provided for anyone with access to the restricted access data. The outputs of this code appear in `$mdata/mort` (and are provided). We have permission from NCHS to post national mortality aggregates constructed from the microdata.
+
+Restricted mortality microdata is available from the NCHS. ACS and CPS data are available from the U.S. Census.
 
 The Matlab bound-generating code (`run_matlab_solver.do`) was run in parallel across 45 processes on a research server, each process taking about 6 hours. As such, we have configured the code to generate bounds only for one age/race group (age 25, white), which are saved in `$mdata/bounds/int/`. The analysis draws all of its code from `$mdata/bounds/`, which has the complete set of bounds. Note that the Matlab bound-generating code is based on a 100-parameter numerical minimization problem which can have local minima, and thus may produce marginally different results in different versions of Matlab or on servers with different memory or default parameters. As such, the bounds generated in `bounds/int` may differ slightly from those in `bounds/`. We do not expect any substantive differences that would affect any of the conclusions of the paper.
 
@@ -91,3 +93,44 @@ This code was tested using Stata 16.0 and Matlab R2019a. Estimated run times on 
 * NCHS build and pre-Matlab build: 2 hours
 * Matlab bound generation: 6 hours * 45 parallel processes
 * `make_results.do`: 1 hour
+
+The mapping of results output names to tables and figures is as follows:
+
+Figure 1
+
+| Exhibit   | Filename                           |
+|-----------|------------------------------------|
+| Figure 1  | scatter-smooth-t-50-[12]-[12].pdf  |
+| Figure 2  | intuit_[a-d].png                   |
+| Figure 3  | mort_cef.pdf                       |
+| Figure 4  | naive-5-women-50-t-[12].pdf        |
+| Figure 5  | trend-smooth-mon-step-t-sex-50.pdf |
+| Figure 6  | changes-total-[12]-[12].pdf        |
+| Figure 7  | changes-nod-[12]-[12].pdf          |
+| Table 1   | table_mort_stats_1992.tex          |
+|           | table_mort_stats_2016.tex          |
+| Table 2   | age_adjusted_all_cause.tex         |
+| Table A1  | icd_causes.tex                     |
+| Table A2  | all_cause_std.tex                  |
+| Figure A1 | std_mort_perc_total.pdf            |
+| Figure A2 | naive-1-women-50-t-[12].pdf        |
+|           | naive-1-men-50-t-[12].pdf          |
+| Figure C1 | polyspline__50_[MF]_2012-2014.pdf  |
+| Table D1  | semimon_bounds.tex                 |
+| Figure D1 | f1992_semimon_[0520100].pdf        |
+| Figure D2 | causes-1992-2-1.pdf                |
+|           | causes-racesex-2-1.pdf             |
+|           | causes-mon-step-2-1.pdf            |
+|           | causes-nof-2-1.pdf                 |
+| Figure D3 | mean_within_rank_50_[12]_comb.pdf  |
+| Figure D4 | total_pops.pdf                     |
+| Figure D5 | hisp_shift_[12].pdf                |
+| Figure D6 | cps_pred_all_dropout.pdf           |
+| Figure D7 | cps_pred_all_hs.pdf                |
+| Figure D8 | ests_yline.pdf                     |
+| Figure D9 | lowess_sex_both.pdf                |
+
+
+## System Requirements
+
+This code relies on Unix (Linux or Mac) Stata/Matlab, and on Python 3.2.
