@@ -1,22 +1,21 @@
-/* SEE STEPS 1 AND 2 BELOW TO SET UP REPLICATION */
-clear all
-set more off
-
-/* STEP 1: SET THE FOLLOWING GLOBALS:
+/************** USER MUST SET THE FOLLOWING PATHS FOR REPLICATION
 $out: path for output files to be created
 mdata: path to data [intermediate data files will be put here too] */
 global out /scratch/pn/mort-test/out
 global tmp /scratch/pn/mort-test/tmp
 global mdata /scratch/pn/mort-test
 
+/* REPLICATOR SHOULD NOT NEED TO CHANGE ANYTHING BELOW THIS POINT */
+clear all
+set more off
+
 if mi("$out") | mi("$tmp") | mi("$mdata") {
   display as error "Globals 'out', 'tmp', and 'mdata' must be set for this to run."
   error 1
 }
 
-/* STEP 2: SET MATLAB PATHS SIMILARLY IN matlab/set_matlab_paths.m */
 file open myfile using "matlab/set_basepath.m", write replace
-file write myfile "base_path = '$mdata'"
+file write myfile "base_path = '$mdata';"
 file close myfile
 
 /* load Stata programs */

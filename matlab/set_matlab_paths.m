@@ -1,5 +1,5 @@
 %% CHANGE THIS LINE TO MATCH $mdata IN make_nra_mortality.do
-set_basepath
+set_basepath;
 
 %% DO NOT CHANGE ANY OF THESE LINES
 output_path = strcat(base_path, "/int");
