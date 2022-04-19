@@ -1,10 +1,6 @@
 /* SEE STEPS 1 AND 2 BELOW TO SET UP REPLICATION */
 clear all
-
-/* ssc install things we need */
-foreach v in savesome listtex xfill unique {
-  ssc install `v'
-}
+set more off
 
 /* STEP 1: SET THE FOLLOWING GLOBALS:
 $out: path for output files to be created
@@ -20,7 +16,6 @@ if mi("$out") | mi("$tmp") | mi("$mdata") {
 
 /* STEP 2: SET MATLAB PATHS SIMILARLY IN matlab/set_matlab_paths.m */
 
-
 /* load Stata programs */
 qui do tools.do
 qui do masala-merge/masala_merge
@@ -35,6 +30,34 @@ adopath + ado
 /* start logging */
 cap log close
 log using $out/nra_mortality.log, text replace
+
+/* provide some info about how and when the program was run */
+/* See https://www.stata.com/manuals13/pcreturn.pdf#pcreturn */
+local variant = cond(c(MP),"MP",cond(c(SE),"SE",c(flavor)) )  
+// alternatively, you could use 
+// local variant = cond(c(stata_version)>13,c(real_flavor),"NA")  
+
+di "=== SYSTEM DIAGNOSTICS ==="
+di "Stata version: `c(stata_version)'"
+di "Updated as of: `c(born_date)'"
+di "Variant:       `variant'"
+di "Processors:    `c(processors)'"
+di "OS:            `c(os)' `c(osdtl)'"
+di "Machine type:  `c(machine_type)'"
+di "=========================="
+
+/* set root folder for running to current path */
+local pwd : pwd
+global rootdir "`pwd'"
+
+/* tell stata where to find packages */
+capture mkdir "$rootdir/ado"
+sysdir set PERSONAL "$rootdir/ado/personal"
+sysdir set PLUS     "$rootdir/ado/plus"
+sysdir set SITE     "$rootdir/ado/site"
+sysdir
+
+
 
 /* store current path (assumed to be repo root folder) */
 global mcode = "`c(pwd)'"
