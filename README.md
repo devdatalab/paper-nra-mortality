@@ -14,6 +14,14 @@ The method is valid for any conditional expectation function with uniformly dist
 
 We include Stata and Matlab code. The Stata code is analytical, and thus fast and easy to run. The Matlab code uses a numerical optimization, which is slower and more involved on the coding side, but allows complex structural restrictions on the CEF. We present an example by constraining the curvature of the CEF.
 
+# Mortality Data
+
+Dataset | Description
+--- | ---
+mortality\_by\_ed\_group.dta | The file contains unadjusted nation-wide annual mortality estimates, by cause, age group, race, sex and education level.
+mortality\_by\_percentile.xlsx | The file contains bounds on mortality change, by cause, age group, race, sex and education percentile group. The normalized change divides the level change in mortality from a given cause by baseline (1992-1994) all-cause mortality. The number thus represents the percentage change in all-cause mortality that is accounted for by changes in the listed cause.
+
+
 # `bound_mort` usage (stata)
 
 We calculated bounds on expected mortality in arbitrary education rank bins, for example education among the least educated 10%. These bounds are calculated under the assumption that mortality is non-increasing in the education rank.
@@ -83,7 +91,7 @@ following steps:
 
 This paper uses restricted NCHS data, because it requires the education of the deceased, which was not reported in public NCHS files beginning around 2005. These restricted data cannot be included in the replication package. Therefore, the makefile comments out `make_mortality_data.do`, which constructs the NCHS + ACS + CPS national aggregates which form the basis of the analysis. However, `make_mortality_data.do` and its subcomponents are provided for anyone with access to the restricted access data. The outputs of this code appear in `$mdata/mort` (and are provided). We have permission from NCHS to post national mortality aggregates constructed from the microdata.
 
-Restricted mortality microdata is available from the NCHS. ACS and CPS data are available from the U.S. Census.
+Restricted mortality microdata is available via an application process from the NCHS. Public-use mortality microdata is very similar but excludes county identifiers in recent years, which affects some of our calculations. Other datasets, including ACS, CPS, and NHIS data, are publicly available.
 
 The Matlab bound-generating code (`run_matlab_solver.do`) was run in parallel across 45 processes on a research server, each process taking about 6 hours. As such, we have configured the code to generate bounds only for one age/race group (age 25, white), which are saved in `$mdata/bounds/int/`. The analysis draws all of its code from `$mdata/bounds/`, which has the complete set of bounds. Note that the Matlab bound-generating code is based on a 100-parameter numerical minimization problem which can have local minima, and thus may produce marginally different results in different versions of Matlab or on servers with different memory or default parameters. As such, the bounds generated in `bounds/int` may differ slightly from those in `bounds/`. We do not expect any substantive differences that would affect any of the conclusions of the paper.
 
