@@ -82,7 +82,7 @@ pr define gen_rates
 
 * drop the four states we won't use *
   if "`dropstates'" != "" {
-    drop if (fipsstr==13|fipsstr==40|fipsstr==44|fipsstr==46)
+    drop if (fipsstr==13 | fipsstr==40 | fipsstr==44 | fipsstr==46)
   }
 
   keep  icd9 icd9n icd10 year  sex `age_gp' edclass`etype'
@@ -503,4 +503,4 @@ gen_rates, etype("_3bin") race(H) granage
 gen_rates, etype("_3bin") race(BNH) granage 
 gen_rates, etype("_3bin") race(O) granage 
 
-*/
+p*/
