@@ -1024,173 +1024,197 @@ clear;
 
     
 
+/*
+Now we have single-year mortality files with one row per death and clean variable names.
+Next, we read them in one by one and do the following:
+    - restrict to the desired sample (e.g. age 25-69, drop foreign residents, etc.)
+    - classify race and education
+    - 
+    
+*/
 
+/* switch back to cr delimiters */
+#delimit cr
+    
+cd $mdata  
 
-
-#delimit ;
-cd $mdata ; 
 /*********************************************/
 /* read in these files, by race educ and sex */
 /*********************************************/
-clear ;
-tempfile tempbig ;
+clear 
+tempfile tempbig 
 
-use $mdata/int/nchs/Mort1989.dta ;
+use $mdata/int/nchs/Mort1989.dta 
 
 /* ignore foreign residents - they aren't in population denominators  */
 /* and keep only those with age in years */
-drop if resstatus>3;
-keep if ageunit==0;
-keep if age>=25 & age<=74;
+drop if resstatus>3
+keep if ageunit==0
+keep if age>=25 & age<=74
+keep year region educ89 hisprec sex age fipsstr fipsctyr icd icdn icd282
 
-keep year region educ89 hisprec sex age fipsstr fipsctyr icd icdn icd282;
 /* CDC doesn't count hispanic origin unknown in its counts by ethnicity - only in its overall mortality count */
-        ren icd icd9;
-        ren icdn icd9n;
+ren icd icd9
+ren icdn icd9n
 
-        gen ind_WNH = hisprec==6;                replace ind_WNH=. if hisprec==9;
-        gen ind_BNH = hisprec==7;                replace ind_BNH=. if hisprec==9;
-        gen ind_hisp = hisprec>=1 & hisprec<=5; replace ind_hisp=. if hisprec==9;
+gen ind_WNH = hisprec==6
+replace ind_WNH=. if hisprec==9
+gen ind_BNH = hisprec==7
+replace ind_BNH=. if hisprec==9
+gen ind_hisp = hisprec>=1 & hisprec<=5
+replace ind_hisp=. if hisprec==9
 
-        gen edclass=1 if educ89<=12;
-        replace edclass=2 if educ89>=13 & educ89<=15;
-        replace edclass=3 if educ89>=16 & educ89<=17;
+gen edclass=1 if educ89<=12
+replace edclass=2 if educ89>=13 & educ89<=15
+replace edclass=3 if educ89>=16 & educ89<=17
 
 /* get the more detailed education variables */
-gen edclass_detailed = edclass + 1 ; 
-replace edclass_detailed = 1 if educ89 < 12  ;
+gen edclass_detailed = edclass + 1 
+replace edclass_detailed = 1 if educ89 < 12  
 
-save `tempbig', replace;
+save `tempbig', replace
 
-forval i = 90(1) 98 {;
-use $mdata/int/nchs/Mort19`i'.dta;
+forval i = 90(1) 98 {
+  use $mdata/int/nchs/Mort19`i'.dta
 
-        drop if resstatus>3;
-        keep if ageunit==0;
-        keep if age>=25 & age<=74;
+  drop if resstatus>3
+  keep if ageunit==0
+  keep if age>=25 & age<=74
 
-keep year region educ89 hisprec sex age fipsstr fipsctyr icd icdn icd282;
-        ren icd icd9;
-        ren icdn icd9n;
-        gen ind_WNH = hisprec==6; replace ind_WNH=. if hisprec==9;
-        gen ind_BNH = hisprec==7; replace ind_BNH=. if hisprec==9;
-        gen ind_hisp = hisprec>=1 & hisprec<=5; replace ind_hisp=. if hisprec==9;
+  keep year region educ89 hisprec sex age fipsstr fipsctyr icd icdn icd282
+  ren icd icd9
+  ren icdn icd9n
+  gen ind_WNH = hisprec==6
+  replace ind_WNH=. if hisprec==9
+  gen ind_BNH = hisprec==7
+  replace ind_BNH=. if hisprec==9
+  gen ind_hisp = hisprec>=1 & hisprec<=5
+  replace ind_hisp=. if hisprec==9
 
-        gen edclass=1 if educ89<=12;
-        replace edclass=2 if educ89>=13 & educ89<=15;
-        replace edclass=3 if educ89>=16 & educ89<=17;
-
-
-/* get detailed educations */
-gen edclass_detailed = edclass + 1; 
-replace edclass_detailed = 1 if educ89 < 12;
-                     
-append using `tempbig';
-save `tempbig', replace;
-};
+  gen edclass=1 if educ89<=12
+  replace edclass=2 if educ89>=13 & educ89<=15
+  replace edclass=3 if educ89>=16 & educ89<=17
 
 
-forval i = 1999(1) 2002 {;
-use $mdata/int/nchs/Mort`i'.dta;
+  /* get detailed educations */
+  gen edclass_detailed = edclass + 1 
+  replace edclass_detailed = 1 if educ89 < 12
+  
+  append using `tempbig'
+  save `tempbig', replace
+}
 
-        drop if resstatus>3;
-        keep if ageunit==0;
-        keep if age>=25 & age<=74;
 
-keep year region educ89 hisprec sex age fipsstr fipsctyr icd10 icd358;
-        gen icd358R = real(icd358);
-        drop icd358; ren icd358R icd358;
+forval i = 1999(1) 2002 {
+  use $mdata/int/nchs/Mort`i'.dta
 
-        gen ind_WNH = hisprec==6; replace ind_WNH=. if hisprec==9;
-        gen ind_BNH = hisprec==7; replace ind_BNH=. if hisprec==9;
-        gen ind_hisp = hisprec>=1 & hisprec<=5; replace ind_hisp=. if hisprec==9;
+  drop if resstatus>3
+  keep if ageunit==0
+  keep if age>=25 & age<=74
 
-        gen edclass=1 if educ89<=12;
-        replace edclass=2 if educ89>=13 & educ89<=15;
-        replace edclass=3 if educ89>=16 & educ89<=17;
+  keep year region educ89 hisprec sex age fipsstr fipsctyr icd10 icd358
+  gen icd358R = real(icd358)
+  drop icd358
+  ren icd358R icd358
 
-/* get detailed educations */
-gen edclass_detailed = edclass + 1;
-replace edclass_detailed = 1 if educ89 < 12;
-                         
-append using `tempbig';
-save `tempbig', replace;
-};
+  gen ind_WNH = hisprec==6
+  replace ind_WNH=. if hisprec==9
+  gen ind_BNH = hisprec==7
+  replace ind_BNH=. if hisprec==9
+  gen ind_hisp = hisprec>=1 & hisprec<=5
+  replace ind_hisp=. if hisprec==9
 
-forval i = 2003(1)2018 {;
-use $mdata/int/nchs/Mort`i'.dta, clear;
+  gen edclass=1 if educ89<=12
+  replace edclass=2 if educ89>=13 & educ89<=15
+  replace edclass=3 if educ89>=16 & educ89<=17
 
-ren fipsstr stlab;
-merge m:1 stlab using raw/misc/state_lab_fips, keepusing(stlab st_FIPS);
-        tab stlab if _m==1;
-        drop if _m==1; drop _m;
-        ren st_FIPS fipsstr;
+  /* get detailed educations */
+  gen edclass_detailed = edclass + 1
+  replace edclass_detailed = 1 if educ89 < 12
+  
+  append using `tempbig'
+  save `tempbig', replace
+}
 
-drop if resstatus>3;
-keep if ageunit==1;
-keep if age>=25 & age<=74;
+forval i = 2003(1)2018 {
+  use $mdata/int/nchs/Mort`i'.dta, clear
+  
+  ren fipsstr stlab
+  merge m:1 stlab using raw/misc/state_lab_fips, keepusing(stlab st_FIPS)
+  tab stlab if _m==1
+  drop if _m==1
+  drop _m
+  ren st_FIPS fipsstr
+  
+  drop if resstatus>3
+  keep if ageunit==1
+  keep if age>=25 & age<=74
+  
+  keep year educ* hisprec sex age fipsstr fipsctyr icd10 icd358
+  gen sexx=1 if sex=="M"
+  replace sexx=2 if sex=="F"
+  drop sex
+  ren sexx sex
+  
+  gen icd358R = real(icd358)
+  drop icd358
+  ren icd358R icd358
+  
+  gen ind_WNH = hisprec==6
+  replace ind_WNH=. if hisprec==9
+  gen ind_BNH = hisprec==7
+  replace ind_BNH=. if hisprec==9
+  gen ind_hisp = hisprec>=1 & hisprec<=5
+  replace ind_hisp=. if hisprec==9
+  
+  gen edclass=1 if educ89<=12 
+  replace edclass=2 if educ89>12  & educ89<=15 
+  replace edclass=3 if educ89>=16  & educ89<=17 
+  replace edclass=1 if educ20003<=3 & educflag==1
+  replace edclass=2 if educ20003>=4 & educ20003<=5 & educflag==1
+  replace edclass=3 if educ20003>=6 & educ20003<=8 & educflag==1
+  
+  /* get detailed ed var */
+  gen edclass_detailed = edclass + 1  
+  replace edclass_detailed = 1 if educ89 < 12 & educflag != 1
+  replace edclass_detailed = 1 if educ20003 <= 2 & educflag == 1
+  
+  append using `tempbig'
+  save `tempbig', replace
+}
 
-keep year educ* hisprec sex age fipsstr fipsctyr icd10 icd358;
-gen sexx=1 if sex=="M";
-replace sexx=2 if sex=="F";
-drop sex;
-ren sexx sex;
-
-gen icd358R = real(icd358);
-drop icd358; ren icd358R icd358;
-
-gen ind_WNH = hisprec==6; replace ind_WNH=. if hisprec==9;
-gen ind_BNH = hisprec==7; replace ind_BNH=. if hisprec==9;
-gen ind_hisp = hisprec>=1 & hisprec<=5; replace ind_hisp=. if hisprec==9;
-
-gen edclass=1 if educ89<=12 ;
-replace edclass=2 if educ89>12  & educ89<=15 ;
-replace edclass=3 if educ89>=16  & educ89<=17 ;
-replace edclass=1 if educ20003<=3 & educflag==1;
-replace edclass=2 if educ20003>=4 & educ20003<=5 & educflag==1;
-replace edclass=3 if educ20003>=6 & educ20003<=8 & educflag==1;
-
-/* get detailed ed var */
-gen edclass_detailed = edclass + 1 ; 
-replace edclass_detailed = 1 if educ89 < 12 & educflag != 1;
-replace edclass_detailed = 1 if educ20003 <= 2 & educflag == 1;
-                        
-append using `tempbig';
-save `tempbig', replace;
-};
-
-gen race=1 if ind_WNH==1;
-replace race=2 if ind_BNH==1;
-replace race=3 if ind_hisp==1;
-tab hisprec if race==.;
+gen race=1 if ind_WNH==1
+replace race=2 if ind_BNH==1
+replace race=3 if ind_hisp==1
+tab hisprec if race==.
 
 /* these are NH other races and hisp origin UNK */
-*drop if race ==.;
-label var race "1 WNH 2 BNH 3 Hisp";
+*drop if race ==.
+label var race "1 WNH 2 BNH 3 Hisp"
 
-gen age_gp=25 if age>=25 & age<=29;
-replace age_gp=30 if age>=30 & age<=34;
-replace age_gp=35 if age>=35 & age<=39;
-replace age_gp=40 if age>=40 & age<=44;
-replace age_gp=45 if age>=45 & age<=49;
-replace age_gp=50 if age>=50 & age<=54;
-replace age_gp=55 if age>=55 & age<=59;
-replace age_gp=60 if age>=60 & age<=64;
-replace age_gp=65 if age>=65 & age<=69;
-replace age_gp=70 if age>=70 & age<=74;
-label var age_gp "25-29, 30-34, etc.";
+gen age_gp=25 if age>=25 & age<=29
+replace age_gp=30 if age>=30 & age<=34
+replace age_gp=35 if age>=35 & age<=39
+replace age_gp=40 if age>=40 & age<=44
+replace age_gp=45 if age>=45 & age<=49
+replace age_gp=50 if age>=50 & age<=54
+replace age_gp=55 if age>=55 & age<=59
+replace age_gp=60 if age>=60 & age<=64
+replace age_gp=65 if age>=65 & age<=69
+replace age_gp=70 if age>=70 & age<=74
+label var age_gp "25-29, 30-34, etc."
 
-replace edclass = 99 if edclass==.;
-label def edlab 1 "LEHS" 2 "SomeC" 3 "4+yrs" 99 "missing";
-label val edclass edlab;
+replace edclass = 99 if edclass==.
+label def edlab 1 "LEHS" 2 "SomeC" 3 "4+yrs" 99 "missing"
+label val edclass edlab
 
-replace edclass_detailed = 99 if edclass_detailed == .;
+replace edclass_detailed = 99 if edclass_detailed == .
 
 
 /* rename edclass to suit conventions */
-ren edclass edclass_3bin ;
-ren edclass_detailed edclass ;
+ren edclass edclass_3bin 
+ren edclass_detailed edclass 
 
 /* snake: write mort_8918 */
-save $mdata/int/nchs/mort_8918, replace;
+save $mdata/int/nchs/mort_8918, replace
 
